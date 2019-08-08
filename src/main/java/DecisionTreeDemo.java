@@ -55,26 +55,26 @@ public class DecisionTreeDemo {
         Instances trainingDataSet = getDataSet(TRAINING_DATA_SET_FILENAME);
         Instances testingDataSet = getDataSet(TESTING_DATA_SET_FILENAME);
 
-        System.out.println("************************** J48 *************************");
+        //System.out.println("************************** J48 *************************");
         /** Classifier here is Linear Regression */
-        Classifier classifier = new J48();
+        //Classifier classifier = new J48();
 
         //J48,Id3
         /** */
-        classifier.buildClassifier(trainingDataSet);
+        //classifier.buildClassifier(trainingDataSet);
         /**
          * train the alogorithm with the training data and evaluate the
          * algorithm with testing data
          */
-        Evaluation eval = new Evaluation(trainingDataSet);
-        eval.evaluateModel(classifier, testingDataSet);
+       // Evaluation eval = new Evaluation(trainingDataSet);
+       // eval.evaluateModel(classifier, testingDataSet);
         /** Print the algorithm summary */
-        System.out.println("** Decision Tress Evaluation with Datasets **");
+       /* System.out.println("** Decision Tress Evaluation with Datasets **");
         System.out.println(eval.toSummaryString());
         System.out.print(" the expression for the input data as per alogorithm is ");
         System.out.println(classifier);
         System.out.println(eval.toMatrixString());
-        System.out.println(eval.toClassDetailsString());
+        System.out.println(eval.toClassDetailsString());*/
 
         System.out.println("************************** ID3 *************************");
         /** Classifier here is Linear Regression */
@@ -92,9 +92,10 @@ public class DecisionTreeDemo {
         /** Print the algorithm summary */
         System.out.println("** Decision Tress Evaluation with Datasets **");
         System.out.println(evalId3.toSummaryString());
-        System.out.print(" the expression for the input data as per alogorithm is ");
-        System.out.println(id3Classifier);
-        System.out.println(evalId3.toMatrixString());
+        System.out.print(id3Classifier);
+        System.out.println();
+        //System.out.println(evalId3.toMatrixString());
+        System.out.println();
         System.out.println(evalId3.toClassDetailsString());
     }
 }
