@@ -27,9 +27,9 @@ public class DecisionTreeDemo {
      */
     public static Instances getDataSet(String fileName) throws IOException {
         /**
-         * we can set the file i.e., loader.setFile("finename") to load the data
+         * we can set the file i.e., loader.setFile("filename") to load the data
          */
-        int classIdx = 1;
+        //int classIdx = 1;
         /** the arffloader to load the arff file */
         ArffLoader loader = new ArffLoader();
         /** load the traing data */
@@ -41,7 +41,7 @@ public class DecisionTreeDemo {
         //loader.setFile(new File(fileName));
         Instances dataSet = loader.getDataSet();
         /** set the index based on the data given in the arff files */
-        dataSet.setClassIndex(classIdx);
+        dataSet.setClassIndex(dataSet.numAttributes()-1);
         return dataSet;
     }
 
@@ -57,22 +57,23 @@ public class DecisionTreeDemo {
 
         //System.out.println("************************** J48 *************************");
         /** Classifier here is Linear Regression */
-        //Classifier classifier = new J48();
+       // J48 j48Classifier = new J48();
 
         //J48,Id3
         /** */
-        //classifier.buildClassifier(trainingDataSet);
+       // j48Classifier.buildClassifier(trainingDataSet);
         /**
          * train the alogorithm with the training data and evaluate the
          * algorithm with testing data
          */
        // Evaluation eval = new Evaluation(trainingDataSet);
-       // eval.evaluateModel(classifier, testingDataSet);
+       // eval.evaluateModel(j48Classifier, testingDataSet);
         /** Print the algorithm summary */
-       /* System.out.println("** Decision Tress Evaluation with Datasets **");
+        /*System.out.println("** Decision Tress Evaluation with Datasets **");
         System.out.println(eval.toSummaryString());
         System.out.print(" the expression for the input data as per alogorithm is ");
-        System.out.println(classifier);
+        System.out.println(j48Classifier);
+        System.out.println(j48Classifier.graph());
         System.out.println(eval.toMatrixString());
         System.out.println(eval.toClassDetailsString());*/
 
@@ -83,6 +84,8 @@ public class DecisionTreeDemo {
         //J48,Id3
         /** */
         id3Classifier.buildClassifier(trainingDataSet);
+        System.out.print(id3Classifier);
+        System.out.println();
         /**
          * train the alogorithm with the training data and evaluate the
          * algorithm with testing data
@@ -92,9 +95,9 @@ public class DecisionTreeDemo {
         /** Print the algorithm summary */
         System.out.println("** Decision Tress Evaluation with Datasets **");
         System.out.println(evalId3.toSummaryString());
-        System.out.print(id3Classifier);
-        System.out.println();
-        //System.out.println(evalId3.toMatrixString());
+
+
+        System.out.println(evalId3.toMatrixString());
         System.out.println();
         System.out.println(evalId3.toClassDetailsString());
     }

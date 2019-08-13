@@ -28,7 +28,7 @@ public class NaiveBayesDemo {
      */
     public static Instances getDataSet(String fileName) throws Exception {
         /**
-         * we can set the file i.e., loader.setFile("finename") to load the data
+         * we can set the file i.e., loader.setFile("filename") to load the data
          */
         StringToWordVector filter = new StringToWordVector();
         int classIdx = 1;
