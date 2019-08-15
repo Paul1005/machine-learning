@@ -1,3 +1,4 @@
+import revisionOperator.RevisionOperator;
 import testProgram.TestProgram;
 
 public class Main {
@@ -9,8 +10,11 @@ public class Main {
         //NaiveBayesDemo.process();
         //RandomForestDemo.process();
         //SMODemo.process();
-        TestProgram testProgram = new TestProgram();
+        //TestProgram testProgram = new TestProgram();
         //testProgram.transformData();
-        testProgram.processData();
+        //testProgram.processData();
+
+        RevisionOperator revisionOperator = new RevisionOperator();
+        
     }
 }
