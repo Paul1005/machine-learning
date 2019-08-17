@@ -15,6 +15,6 @@ public class Main {
         //testProgram.processData();
 
         RevisionOperator revisionOperator = new RevisionOperator();
-        
+        revisionOperator.run("tennis-train", "tennis-test");
     }
 }

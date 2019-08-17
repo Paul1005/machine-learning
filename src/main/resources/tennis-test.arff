@@ -1,13 +1,13 @@
 @relation tennis-train
 
-@attribute Outlook {Sunny,Overcast,Rain}
-@attribute Temp. {Hot,Mild,Cool}
+@attribute Outlook {Sunny,Overcast}
+@attribute Temp. {Hot,Cool}
 @attribute Humidity {High,Normal}
 @attribute Wind {Weak,Strong}
 @attribute Decision {No,Yes}
 
 @data
-Sunny,Mild,Normal,Strong,Yes
-Overcast,Mild,High,Strong,Yes
-Overcast,Hot,Normal,Weak,Yes
-Rain,Mild,High,Strong,No
+%Sunny,Mild,Normal,Strong,Yes
+%Overcast,Cool,High,Strong,Yes
+%Overcast,Hot,Normal,Weak,Yes
+%Overcast,Cool,High,Strong,No
