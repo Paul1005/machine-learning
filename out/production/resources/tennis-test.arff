@@ -7,7 +7,3 @@
 @attribute Decision {No,Yes}
 
 @data
-%Sunny,Mild,Normal,Strong,Yes
-%Overcast,Cool,High,Strong,Yes
-%Overcast,Hot,Normal,Weak,Yes
-%Overcast,Cool,High,Strong,No
