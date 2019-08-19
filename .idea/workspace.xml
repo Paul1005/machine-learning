@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="15bb43a3-06eb-4bdb-a5f1-41952ab92d6e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/revisionOperator/RevisionOperator.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -55,12 +54,12 @@
     <session id="-774473088">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
-          <entry key="project.open.time.1" value="4" />
+          <entry key="project.closed" value="9" />
+          <entry key="project.open.time.1" value="5" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="5" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -86,14 +85,14 @@
           <entry key="arff" value="202" />
           <entry key="csv" value="32" />
           <entry key="gradle" value="2" />
-          <entry key="java" value="3615" />
+          <entry key="java" value="3692" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSV" value="32" />
           <entry key="Groovy" value="2" />
-          <entry key="JAVA" value="3615" />
+          <entry key="JAVA" value="3692" />
           <entry key="PLAIN_TEXT" value="202" />
         </counts>
       </usages-collector>
@@ -104,20 +103,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
-              <caret line="107" column="45" selection-start-line="107" selection-start-column="45" selection-end-line="107" selection-end-column="45" />
+            <state relative-caret-position="212">
+              <caret line="143" column="73" selection-start-line="143" selection-start-column="73" selection-end-line="143" selection-end-column="73" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-test.arff">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="19" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -789,6 +779,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -847,7 +838,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -971,18 +961,19 @@
       <workItem from="1566066174209" duration="1364000" />
       <workItem from="1566106323821" duration="2765000" />
       <workItem from="1566150904264" duration="10628000" />
-      <workItem from="1566192567910" duration="6083000" />
+      <workItem from="1566192567910" duration="6113000" />
+      <workItem from="1566243739004" duration="3359000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82291000" />
+    <option name="totallyTimeSpent" value="85680000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16577825" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1673774" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -991,7 +982,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3564464" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3564464" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1162,8 +1153,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/food-test.csv">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="csv-text-editor" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/NaiveBayesDemo.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1180,8 +1171,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/leaf.csv">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="csv-text-editor" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/leaf-test.arff">
       <provider selected="true" editor-type-id="text-editor">
@@ -1191,12 +1182,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/food-train.csv">
+      <provider editor-type-id="csv-text-editor" />
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="1" selection-end-column="28" />
         </state>
       </provider>
-      <provider editor-type-id="csv-text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/leaf.arff">
       <provider selected="true" editor-type-id="text-editor">
@@ -1280,8 +1271,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="107" column="45" selection-start-line="107" selection-start-column="45" selection-end-line="107" selection-end-column="45" />
+        <state relative-caret-position="212">
+          <caret line="143" column="73" selection-start-line="143" selection-start-column="73" selection-end-line="143" selection-end-column="73" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

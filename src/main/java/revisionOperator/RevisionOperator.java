@@ -53,20 +53,20 @@ public class RevisionOperator {
     private Instances setUpData() throws Exception {
         attributes = new ArrayList<>(5);
         ArrayList<String> outlook = new ArrayList<>();
-        outlook.add("Sunny");
         outlook.add("Overcast");
+        outlook.add("Sunny");
         ArrayList<String> temp = new ArrayList<>();
-        temp.add("Hot");
         temp.add("Cool");
+        temp.add("Hot");
         ArrayList<String> humidity = new ArrayList<>();
-        humidity.add("High");
         humidity.add("Normal");
+        humidity.add("High");
         ArrayList<String> wind = new ArrayList<>();
-        wind.add("Strong");
         wind.add("Weak");
+        wind.add("Strong");
         ArrayList<String> decision = new ArrayList<>();
-        decision.add("Yes");
         decision.add("No");
+        decision.add("Yes");
 
         attributeNames = new ArrayList<>(5);
         attributeNames.add("Outlook");
@@ -89,17 +89,21 @@ public class RevisionOperator {
     private void processData() throws Exception {
         Instances trainingInstances = setUpData();
 
-        trainingInstances = addInitialSetK("Outlook && Temp. && Humidity, 0", trainingInstances); // add initial dataSet K
+        addInitialSetK("Outlook && Temp. && Humidity, 0", trainingInstances); // add initial dataSet K
 
         System.out.println(trainingInstances);
 
-        trainingInstances = addInstance("Strong, 0", trainingInstances);
-        Id3 id3 = new Id3();
+        addInstance("Wind, 0", trainingInstances);
+
+        System.out.println(trainingInstances);
+
+
+        /*Id3 id3 = new Id3();
         id3.buildClassifier(trainingInstances);
 
         trainingInstances.numAttributes();
 
-        /*Evaluation evaluation = new Evaluation(trainingInstances);
+        Evaluation evaluation = new Evaluation(trainingInstances);
 
         Instances testingInstances = getData(testingFile);
 
@@ -110,37 +114,7 @@ public class RevisionOperator {
         System.out.println(evaluation.toClassDetailsString());*/
     }
 
-    private Instances addInstance(String newLine, Instances instances) throws Exception {
-        String[] splitLine = newLine.split(", ");
-        String[] terms = splitLine[0].split(" && ");
-
-        double[] newInstance = new double[instances.numAttributes()];
-
-        Instance k = instances.get(0);
-
-        for(int i = 0; i < newInstance.length-1; i++){
-            newInstance[i] = k.index(i);
-            for(String term: terms){
-                if(term.equals(attributeNames.get(i))){
-                    if(term.charAt(0) == '!'){
-                        newInstance[i] = 0;
-                    } else {
-                        newInstance[i] = 1;
-                    }
-                    break;
-                }
-            }
-
-        }
-
-        newInstance[newInstance.length-1] = Double.parseDouble(splitLine[1]);
-
-        instances.add(new DenseInstance(1.0, newInstance));
-
-        return instances;
-    }
-
-    private Instances addInitialSetK(String k, Instances instances) throws Exception {
+    private void addInitialSetK(String k, Instances instances) throws Exception {
         String[] splitLine = k.split(", ");
         String[] terms = splitLine[0].split(" && ");
 
@@ -159,8 +133,33 @@ public class RevisionOperator {
         newInstance[newInstance.length-1] = Double.parseDouble(splitLine[1]);
 
         instances.add(new DenseInstance(1.0, newInstance));
+    }
 
-        return instances;
+    private void addInstance(String newLine, Instances instances) throws Exception {
+        String[] splitLine = newLine.split(", ");
+        String[] terms = splitLine[0].split(" && ");
+
+        double[] newInstance = new double[instances.numAttributes()];
+
+        double[] k = instances.get(0).toDoubleArray(); // get first entry
+
+        for(int i = 0; i < newInstance.length-1; i++){
+            newInstance[i] = k[i];
+            for(String term: terms){
+                if(term.equals(attributeNames.get(i))){
+                    if(term.charAt(0) == '!'){
+                        newInstance[i] = 0;
+                    } else {
+                        newInstance[i] = 1;
+                    }
+                    break;
+                }
+            }
+        }
+
+        newInstance[newInstance.length-1] = Double.parseDouble(splitLine[1]);
+
+        instances.add(new DenseInstance(1.0, newInstance));
     }
 
     public void reviseData() {
