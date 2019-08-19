@@ -90,28 +90,22 @@ public class RevisionOperator {
         Instances trainingInstances = setUpData();
 
         addInitialSetK("Outlook && Temp. && Humidity, 0", trainingInstances); // add initial dataSet K
-
-        System.out.println(trainingInstances);
-
         addInstance("Wind, 0", trainingInstances);
+        addInstance("!Outlook, 1", trainingInstances);
+        System.out.println(trainingInstances + "\n");
 
-        System.out.println(trainingInstances);
-
-
-        /*Id3 id3 = new Id3();
+        Id3 id3 = new Id3();
         id3.buildClassifier(trainingInstances);
+        System.out.println(id3 + "\n");
 
-        trainingInstances.numAttributes();
+        addInstance("!Outlook && !Temp, 1", trainingInstances);
 
-        Evaluation evaluation = new Evaluation(trainingInstances);
+        System.out.println(trainingInstances + "\n");
 
-        Instances testingInstances = getData(testingFile);
+        id3 = new Id3();
+        id3.buildClassifier(trainingInstances);
+        System.out.println(id3 + "\n");
 
-        evaluation.evaluateModel(id3, testingInstances);
-
-        System.out.println(evaluation.toSummaryString());
-        System.out.println(evaluation.toMatrixString());
-        System.out.println(evaluation.toClassDetailsString());*/
     }
 
     private void addInitialSetK(String k, Instances instances) throws Exception {
@@ -146,13 +140,16 @@ public class RevisionOperator {
         for(int i = 0; i < newInstance.length-1; i++){
             newInstance[i] = k[i];
             for(String term: terms){
-                if(term.equals(attributeNames.get(i))){
-                    if(term.charAt(0) == '!'){
+                if(term.charAt(0) == '!'){
+                    if(term.substring(1).equals(attributeNames.get(i))) {
                         newInstance[i] = 0;
-                    } else {
-                        newInstance[i] = 1;
+                        break;
                     }
-                    break;
+                } else{
+                    if(term.equals(attributeNames.get(i))) {
+                        newInstance[i] = 1;
+                        break;
+                    }
                 }
             }
         }
