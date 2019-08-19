@@ -89,12 +89,11 @@ public class RevisionOperator {
     private void processData() throws Exception {
         Instances trainingInstances = setUpData();
 
-        trainingInstances = addInitialSetK("{(Outlook && Temp. && Humidity, 0)}", trainingInstances); // add initial dataSet K
-
+        trainingInstances = addInitialSetK("Outlook && Temp. && Humidity, 0", trainingInstances); // add initial dataSet K
 
         System.out.println(trainingInstances);
 
-
+        trainingInstances = addInstance("Strong, 0", trainingInstances);
         Id3 id3 = new Id3();
         id3.buildClassifier(trainingInstances);
 
@@ -112,13 +111,29 @@ public class RevisionOperator {
     }
 
     private Instances addInstance(String newLine, Instances instances) throws Exception {
+        String[] splitLine = newLine.split(", ");
+        String[] terms = splitLine[0].split(" && ");
+
         double[] newInstance = new double[instances.numAttributes()];
 
-        newInstance[0] = 1;
-        newInstance[1] = 1;
-        newInstance[2] = 1;
-        newInstance[3] = 0;
-        newInstance[4] = 0;
+        Instance k = instances.get(0);
+
+        for(int i = 0; i < newInstance.length-1; i++){
+            newInstance[i] = k.index(i);
+            for(String term: terms){
+                if(term.equals(attributeNames.get(i))){
+                    if(term.charAt(0) == '!'){
+                        newInstance[i] = 0;
+                    } else {
+                        newInstance[i] = 1;
+                    }
+                    break;
+                }
+            }
+
+        }
+
+        newInstance[newInstance.length-1] = Double.parseDouble(splitLine[1]);
 
         instances.add(new DenseInstance(1.0, newInstance));
 
@@ -126,8 +141,23 @@ public class RevisionOperator {
     }
 
     private Instances addInitialSetK(String k, Instances instances) throws Exception {
+        String[] splitLine = k.split(", ");
+        String[] terms = splitLine[0].split(" && ");
+
         double[] newInstance = new double[instances.numAttributes()];
-        
+
+        for(int i = 0; i < newInstance.length-1; i++){
+            newInstance[i] = 0;
+            for(String term: terms){
+                if(term.equals(attributeNames.get(i))){
+                    newInstance[i] = 1;
+                    break;
+                }
+            }
+        }
+
+        newInstance[newInstance.length-1] = Double.parseDouble(splitLine[1]);
+
         instances.add(new DenseInstance(1.0, newInstance));
 
         return instances;
