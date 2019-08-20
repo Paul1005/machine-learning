@@ -121,7 +121,13 @@ public class RevisionOperator {
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
 
-        ArrayList<HashMap<String, String>> solutions = determineSolutions(id3.toString());
+        addInstance("!Outlook && !Temp. && !Humidity, 1", trainingInstances);
+
+        System.out.println(trainingInstances + "\n");
+
+        id3 = new Id3();
+        id3.buildClassifier(trainingInstances);
+        System.out.println(id3 + "\n");
 
         addInstance("!Outlook && !Temp. && !Humidity && Wind, 0", trainingInstances);
 
@@ -130,6 +136,9 @@ public class RevisionOperator {
         id3 = new Id3();
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
+
+        ArrayList<HashMap<String, String>> solutions = determineSolutions(id3.toString());
+        System.out.println(solutions);
     }
 
     private ArrayList<HashMap<String, String>> determineSolutions(String tree) {
@@ -138,15 +147,17 @@ public class RevisionOperator {
         for (int i = 0; i < lines.length; i++) {
             if (lines[i].contains("Yes")) {
                 int j = i;
+                HashMap<String, String> dictionary = new HashMap<>();
                 while (lines[j].contains("|")) {
-                    HashMap<String, String> dictionary = new HashMap<>();
                     String key = lines[j].split(" = ")[0].split("  ")[1];
                     String value = lines[j].split(" = ")[1].split(": ")[0];
                     dictionary.put(key, value);
-                    solutions.add(dictionary);
-                    j = j - 2;
+                    if(lines[j].contains("No")){
+                        j = j - 2;
+                    } else if(lines[j].contains("Yes")){
+                        j = j - 1;
+                    }
                 }
-                HashMap<String, String> dictionary = new HashMap<>();
                 String key = lines[j].split(" = ")[0];
                     /*int attributeIndex = 0;
                     for (int j = 0; j < attributeNames.size(); j++) {
@@ -166,7 +177,7 @@ public class RevisionOperator {
                 solutions.add(dictionary);
             }
         }
-        return null;
+        return solutions;
     }
 
     private double calculateInformationGain(double entropy, Instances instances, String attribute) {
