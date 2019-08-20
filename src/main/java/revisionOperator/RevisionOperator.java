@@ -1,18 +1,12 @@
 package revisionOperator;
 
-import weka.classifiers.Evaluation;
 import weka.classifiers.trees.Id3;
-import weka.core.Attribute;
-import weka.core.DenseInstance;
-import weka.core.Instance;
-import weka.core.Instances;
+import weka.core.*;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.CSVLoader;
 import weka.core.converters.ConverterUtils;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -94,6 +88,18 @@ public class RevisionOperator {
         addInstance("!Outlook, 1", trainingInstances);
         System.out.println(trainingInstances + "\n");
 
+        double entropy = calculateEntropy(trainingInstances);
+        System.out.println(entropy);
+
+        double outlookInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(0));
+        double temperatureInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(1));
+        double humidityInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(2));
+        double windInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(3));
+        System.out.println(outlookInfoGain);
+        System.out.println(temperatureInfoGain);
+        System.out.println(humidityInfoGain);
+        System.out.println(windInfoGain);
+
         Id3 id3 = new Id3();
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
@@ -108,23 +114,82 @@ public class RevisionOperator {
 
     }
 
+    private double calculateInformationGain(double entropy, Instances instances, String attribute) {
+        double numInstances = instances.size();
+        double numPositives = 0;
+        double numNegatives = 0;
+        double entropyPositive;
+        double entropyNegative;
+
+        int attributeIndex = 0;
+
+        for (int i = 0; i < attributeNames.size(); i++) {
+            if (attribute.equals(attributeNames.get(i))) {
+                attributeIndex = i;
+                break;
+            }
+        }
+
+        Instances positiveInstances = new Instances("positive", attributes, 0);
+        Instances negativeInstances = new Instances("negative", attributes, 0);
+        for (Instance instance : instances) {
+            if (instance.toDoubleArray()[attributeIndex] == 0) {
+                negativeInstances.add(instance);
+                numNegatives++;
+            } else if (instance.toDoubleArray()[attributeIndex] == 1) {
+                positiveInstances.add(instance);
+                numPositives++;
+            }
+        }
+
+        entropyPositive = calculateEntropy(positiveInstances);
+        entropyNegative = calculateEntropy(negativeInstances);
+        return entropy - numPositives / numInstances * entropyPositive - numNegatives / numInstances * entropyNegative;
+    }
+
+    private double calculateEntropy(Instances instances) {
+        double numInstances = instances.size();
+        if(numInstances == 0){
+            return 0;
+        }
+        double numPositives = 0;
+        double numNegatives = 0;
+
+        for (Instance instance : instances) {
+            if (instance.toDoubleArray()[instance.numAttributes() - 1] == 0) {
+                numNegatives++;
+            } else if (instance.toDoubleArray()[instance.numAttributes() - 1] == 1) {
+                numPositives++;
+            }
+        }
+
+        return -numPositives / numInstances * logOfBase2(numPositives / numInstances) - numNegatives / numInstances * logOfBase2(numNegatives / numInstances);
+    }
+
+    public double logOfBase2(double num) {
+        if (num == 0){
+            return Double.MAX_VALUE;
+        }
+        return Math.log(num) / Math.log(2);
+    }
+
     private void addInitialSetK(String k, Instances instances) throws Exception {
         String[] splitLine = k.split(", ");
         String[] terms = splitLine[0].split(" && ");
 
         double[] newInstance = new double[instances.numAttributes()];
 
-        for(int i = 0; i < newInstance.length-1; i++){
+        for (int i = 0; i < newInstance.length - 1; i++) {
             newInstance[i] = 0;
-            for(String term: terms){
-                if(term.equals(attributeNames.get(i))){
+            for (String term : terms) {
+                if (term.equals(attributeNames.get(i))) {
                     newInstance[i] = 1;
                     break;
                 }
             }
         }
 
-        newInstance[newInstance.length-1] = Double.parseDouble(splitLine[1]);
+        newInstance[newInstance.length - 1] = Double.parseDouble(splitLine[1]);
 
         instances.add(new DenseInstance(1.0, newInstance));
     }
@@ -137,16 +202,16 @@ public class RevisionOperator {
 
         double[] k = instances.get(0).toDoubleArray(); // get first entry
 
-        for(int i = 0; i < newInstance.length-1; i++){
+        for (int i = 0; i < newInstance.length - 1; i++) {
             newInstance[i] = k[i];
-            for(String term: terms){
-                if(term.charAt(0) == '!'){
-                    if(term.substring(1).equals(attributeNames.get(i))) {
+            for (String term : terms) {
+                if (term.charAt(0) == '!') {
+                    if (term.substring(1).equals(attributeNames.get(i))) {
                         newInstance[i] = 0;
                         break;
                     }
-                } else{
-                    if(term.equals(attributeNames.get(i))) {
+                } else {
+                    if (term.equals(attributeNames.get(i))) {
                         newInstance[i] = 1;
                         break;
                     }
@@ -154,7 +219,7 @@ public class RevisionOperator {
             }
         }
 
-        newInstance[newInstance.length-1] = Double.parseDouble(splitLine[1]);
+        newInstance[newInstance.length - 1] = Double.parseDouble(splitLine[1]);
 
         instances.add(new DenseInstance(1.0, newInstance));
     }
