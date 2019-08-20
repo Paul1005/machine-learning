@@ -9,17 +9,25 @@ import weka.core.converters.ConverterUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
 
+/*
+NOTE: we want to find a new state whose distance is as small as possible from one of our existing solutions. The
+existing solutions may have different possible values for certain states, we take the minimum distance.
+Also the case where we have to discard one of our old beliefs, not sure what to do about that yet.
+Add new belief, if logically consistent, keep old ones, if not discard something?
+ */
 public class RevisionOperator {
-    private String trainingFile;
-    private String testingFile;
+    //private String trainingFile;
+    //private String testingFile;
     private String filePath = "src/main/resources/";
     private ArrayList<Attribute> attributes;
     private ArrayList<String> attributeNames;
 
     public void run(String csvTrainingFile, String csvTestingFile) throws Exception {
-        trainingFile = csvTrainingFile + ".arff";
-        testingFile = csvTestingFile + ".arff";
+        //trainingFile = csvTrainingFile + ".arff";
+        //testingFile = csvTestingFile + ".arff";
         //transformData(csvTrainingFile);
         //transformData(csvTestingFile);
         processData();
@@ -113,6 +121,52 @@ public class RevisionOperator {
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
 
+        ArrayList<HashMap<String, String>> solutions = determineSolutions(id3.toString());
+
+        addInstance("!Outlook && !Temp. && !Humidity && Wind, 0", trainingInstances);
+
+        System.out.println(trainingInstances + "\n");
+
+        id3 = new Id3();
+        id3.buildClassifier(trainingInstances);
+        System.out.println(id3 + "\n");
+    }
+
+    private ArrayList<HashMap<String, String>> determineSolutions(String tree) {
+        String[] lines = tree.split("\n");
+        ArrayList<HashMap<String, String>> solutions = new ArrayList<>();
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i].contains("Yes")) {
+                int j = i;
+                while (lines[j].contains("|")) {
+                    HashMap<String, String> dictionary = new HashMap<>();
+                    String key = lines[j].split(" = ")[0].split("  ")[1];
+                    String value = lines[j].split(" = ")[1].split(": ")[0];
+                    dictionary.put(key, value);
+                    solutions.add(dictionary);
+                    j = j - 2;
+                }
+                HashMap<String, String> dictionary = new HashMap<>();
+                String key = lines[j].split(" = ")[0];
+                    /*int attributeIndex = 0;
+                    for (int j = 0; j < attributeNames.size(); j++) {
+                        if(key.equals(attributeNames.get(j))){
+                            attributeIndex = j;
+                        }
+                    }*/
+                    /*int valueIndex = 0;
+                    for (int j = 0; j < attributes.get(attributeIndex).numValues(); j++){
+                        String value = lines[i].split(" = ")[1].split(": ")[0];
+                        if(value.equals(attributes.get(attributeIndex).value(j))){
+
+                        }
+                    }*/
+                String value = lines[j].split(" = ")[1].split(": ")[0];
+                dictionary.put(key, value);
+                solutions.add(dictionary);
+            }
+        }
+        return null;
     }
 
     private double calculateInformationGain(double entropy, Instances instances, String attribute) {
@@ -150,7 +204,7 @@ public class RevisionOperator {
 
     private double calculateEntropy(Instances instances) {
         double numInstances = instances.size();
-        if(numInstances == 0){
+        if (numInstances == 0) {
             return 0;
         }
         double numPositives = 0;
@@ -164,14 +218,7 @@ public class RevisionOperator {
             }
         }
 
-        return -numPositives / numInstances * logOfBase2(numPositives / numInstances) - numNegatives / numInstances * logOfBase2(numNegatives / numInstances);
-    }
-
-    public double logOfBase2(double num) {
-        if (num == 0){
-            return Double.MAX_VALUE;
-        }
-        return Math.log(num) / Math.log(2);
+        return -numPositives / numInstances * Utils.log2(numPositives / numInstances) - numNegatives / numInstances * Utils.log2(numNegatives / numInstances);
     }
 
     private void addInitialSetK(String k, Instances instances) throws Exception {
