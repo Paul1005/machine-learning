@@ -95,6 +95,7 @@ public class RevisionOperator {
         double temperatureInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(1));
         double humidityInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(2));
         double windInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(3));
+
         System.out.println(outlookInfoGain);
         System.out.println(temperatureInfoGain);
         System.out.println(humidityInfoGain);
@@ -104,7 +105,7 @@ public class RevisionOperator {
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
 
-        addInstance("!Outlook && !Temp, 1", trainingInstances);
+        addInstance("!Outlook && !Temp., 1", trainingInstances);
 
         System.out.println(trainingInstances + "\n");
 
@@ -206,7 +207,8 @@ public class RevisionOperator {
             newInstance[i] = k[i];
             for (String term : terms) {
                 if (term.charAt(0) == '!') {
-                    if (term.substring(1).equals(attributeNames.get(i))) {
+                    term = term.substring(1);
+                    if (term.equals(attributeNames.get(i))) {
                         newInstance[i] = 0;
                         break;
                     }
