@@ -9,7 +9,6 @@ import weka.core.converters.ConverterUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 /*
@@ -91,9 +90,17 @@ public class RevisionOperator {
     private void processData() throws Exception {
         Instances trainingInstances = setUpData();
 
-        addInitialSetK("Outlook && Temp. && Humidity, 0", trainingInstances); // add initial dataSet K
-        addInstance("Wind, 0", trainingInstances);
-        addInstance("!Outlook, 1", trainingInstances);
+        addInitialSetK(", 1", trainingInstances); // add initial dataSet K
+        //addInstance("Wind, 0", trainingInstances);
+        //addInstance("!Outlook, 1", trainingInstances);
+        System.out.println(trainingInstances + "\n");
+
+        Id3 id3 = new Id3();
+        id3.buildClassifier(trainingInstances);
+        System.out.println(id3 + "\n");
+
+        addInstance("Outlook, 0", trainingInstances);
+
         System.out.println(trainingInstances + "\n");
 
         double entropy = calculateEntropy(trainingInstances);
@@ -109,11 +116,11 @@ public class RevisionOperator {
         System.out.println(humidityInfoGain);
         System.out.println(windInfoGain);
 
-        Id3 id3 = new Id3();
+        id3 = new Id3();
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
 
-        addInstance("!Outlook && !Temp., 1", trainingInstances);
+        addInstance("Temp., 0", trainingInstances);
 
         System.out.println(trainingInstances + "\n");
 
@@ -121,7 +128,7 @@ public class RevisionOperator {
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
 
-        addInstance("!Outlook && !Temp. && !Humidity, 1", trainingInstances);
+        addInstance("Temp. && Humidity, 1", trainingInstances);
 
         System.out.println(trainingInstances + "\n");
 
@@ -129,7 +136,15 @@ public class RevisionOperator {
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
 
-        addInstance("!Outlook && !Temp. && !Humidity && Wind, 0", trainingInstances);
+        addInstance("!Temp., 0", trainingInstances);
+
+        System.out.println(trainingInstances + "\n");
+
+        id3 = new Id3();
+        id3.buildClassifier(trainingInstances);
+        System.out.println(id3 + "\n");
+
+        addInstance("!Temp. && !Humidity, 1", trainingInstances);
 
         System.out.println(trainingInstances + "\n");
 
@@ -149,29 +164,17 @@ public class RevisionOperator {
                 int j = i;
                 HashMap<String, String> dictionary = new HashMap<>();
                 while (lines[j].contains("|")) {
-                    String key = lines[j].split(" = ")[0].split("  ")[1];
+                    long level = lines[j].chars().filter(num -> num == '|').count();
+                    String key = lines[j].split(" = ")[0].replace( "|", "").replace(" ", "");
                     String value = lines[j].split(" = ")[1].split(": ")[0];
                     dictionary.put(key, value);
-                    if(lines[j].contains("No")){
-                        j = j - 2;
-                    } else if(lines[j].contains("Yes")){
-                        j = j - 1;
+                    int k = 1;
+                    while(lines[j - k].chars().filter(num -> num == '|').count() != level - 1){
+                        k++;
                     }
+                    j = j - k;
                 }
                 String key = lines[j].split(" = ")[0];
-                    /*int attributeIndex = 0;
-                    for (int j = 0; j < attributeNames.size(); j++) {
-                        if(key.equals(attributeNames.get(j))){
-                            attributeIndex = j;
-                        }
-                    }*/
-                    /*int valueIndex = 0;
-                    for (int j = 0; j < attributes.get(attributeIndex).numValues(); j++){
-                        String value = lines[i].split(" = ")[1].split(": ")[0];
-                        if(value.equals(attributes.get(attributeIndex).value(j))){
-
-                        }
-                    }*/
                 String value = lines[j].split(" = ")[1].split(": ")[0];
                 dictionary.put(key, value);
                 solutions.add(dictionary);
@@ -229,7 +232,14 @@ public class RevisionOperator {
             }
         }
 
-        return -numPositives / numInstances * Utils.log2(numPositives / numInstances) - numNegatives / numInstances * Utils.log2(numNegatives / numInstances);
+        return -numPositives / numInstances * logOfBase2(numPositives / numInstances) - numNegatives / numInstances * logOfBase2(numNegatives / numInstances);
+    }
+
+    public double logOfBase2(double num) {
+        if (num == 0){
+            return Double.MAX_VALUE;
+        }
+        return Math.log(num) / Math.log(2);
     }
 
     private void addInitialSetK(String k, Instances instances) throws Exception {
