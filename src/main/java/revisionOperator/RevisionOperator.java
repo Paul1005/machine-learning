@@ -99,11 +99,10 @@ public class RevisionOperator {
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
 
-        addInstance("Outlook, 0", trainingInstances);
+        addInstance("Outlook, 0 ", trainingInstances);
 
         System.out.println(trainingInstances + "\n");
-
-        double entropy = calculateEntropy(trainingInstances);
+        /*double entropy = calculateEntropy(trainingInstances);
         System.out.println(entropy);
 
         double outlookInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(0));
@@ -114,11 +113,16 @@ public class RevisionOperator {
         System.out.println(outlookInfoGain);
         System.out.println(temperatureInfoGain);
         System.out.println(humidityInfoGain);
-        System.out.println(windInfoGain);
+        System.out.println(windInfoGain);*/
 
         id3 = new Id3();
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
+
+        ArrayList<Belief> solutions = determineSolutions(id3.toString(), trainingInstances);
+
+        System.out.println(solutions);
+        System.out.println(solutions.size());
 
         addInstance("Temp., 0", trainingInstances);
 
@@ -152,11 +156,9 @@ public class RevisionOperator {
         id3.buildClassifier(trainingInstances);
         System.out.println(id3 + "\n");
 
-        ArrayList<HashMap<String, String>> solutions = determineSolutions(id3.toString());
-        System.out.println(solutions);
     }
 
-    private ArrayList<HashMap<String, String>> determineSolutions(String tree) {
+    private ArrayList<Belief> determineSolutions(String tree, Instances instances) {
         String[] lines = tree.split("\n");
         ArrayList<HashMap<String, String>> solutions = new ArrayList<>();
         for (int i = 0; i < lines.length; i++) {
@@ -165,11 +167,11 @@ public class RevisionOperator {
                 HashMap<String, String> dictionary = new HashMap<>();
                 while (lines[j].contains("|")) {
                     long level = lines[j].chars().filter(num -> num == '|').count();
-                    String key = lines[j].split(" = ")[0].replace( "|", "").replace(" ", "");
+                    String key = lines[j].split(" = ")[0].replace("|", "").replace(" ", "");
                     String value = lines[j].split(" = ")[1].split(": ")[0];
                     dictionary.put(key, value);
                     int k = 1;
-                    while(lines[j - k].chars().filter(num -> num == '|').count() != level - 1){
+                    while (lines[j - k].chars().filter(num -> num == '|').count() != level - 1) {
                         k++;
                     }
                     j = j - k;
@@ -180,7 +182,48 @@ public class RevisionOperator {
                 solutions.add(dictionary);
             }
         }
-        return solutions;
+
+        ArrayList<Belief> beliefs = new ArrayList<>();
+
+        for (HashMap<String, String> solution : solutions) {
+            int unknowns = 0;
+            for (int i = 0; i < attributeNames.size() - 1; i++) {
+                if (!solution.containsKey(attributeNames.get(i))) {
+                    unknowns++;
+                    solution.put(attributeNames.get(i), "?");
+                }
+            }
+
+            int numRows = (int) Math.pow(2, unknowns);
+            for (int i = 0; i < numRows; i++) {
+                Belief belief = new Belief();
+                belief.setSolution(new HashMap<>());
+                int k = 0;
+                for (int j = 0; j < attributeNames.size() - 1; j++) {
+                    if (solution.get(attributeNames.get(j)).equals("?")) {
+                        int value = (i / (int) Math.pow(2, k)) % 2;
+                        belief.put(attributeNames.get(j), attributes.get(j).value(value));
+                        k++;
+                    } else{
+                        belief.put(attributeNames.get(j), solution.get(attributeNames.get(j)));
+                    }
+                }
+                beliefs.add(belief);
+            }
+        }
+
+        for (Instance instance : instances) {
+            for (int i = 0; i < beliefs.size(); i++) {
+                boolean isIdentical = true;
+                for (int j = 0; j < attributeNames.size()-1; j++) {
+                    isIdentical = isIdentical && instance.stringValue(j).equals(beliefs.get(i).getSolution().get(attributeNames.get(j)));
+                }
+                if (isIdentical) {
+                    beliefs.get(i).increaseRank();
+                }
+            }
+        }
+        return beliefs;
     }
 
     private double calculateInformationGain(double entropy, Instances instances, String attribute) {
@@ -236,7 +279,7 @@ public class RevisionOperator {
     }
 
     public double logOfBase2(double num) {
-        if (num == 0){
+        if (num == 0) {
             return Double.MAX_VALUE;
         }
         return Math.log(num) / Math.log(2);

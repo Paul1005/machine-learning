@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15bb43a3-06eb-4bdb-a5f1-41952ab92d6e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/revisionOperator/RevisionOperator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/revisionOperator/RevisionOperator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -53,12 +56,13 @@
     <session id="-774473088">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
-          <entry key="project.open.time.1" value="6" />
+          <entry key="project.closed" value="11" />
+          <entry key="project.open.time.1" value="7" />
           <entry key="project.open.time.3" value="2" />
+          <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="5" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -66,7 +70,7 @@
           <entry key="arff" value="74" />
           <entry key="csv" value="5" />
           <entry key="gradle" value="1" />
-          <entry key="java" value="40" />
+          <entry key="java" value="43" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
@@ -74,7 +78,7 @@
         <counts>
           <entry key="CSV" value="5" />
           <entry key="Groovy" value="1" />
-          <entry key="JAVA" value="40" />
+          <entry key="JAVA" value="43" />
           <entry key="PLAIN_TEXT" value="74" />
           <entry key="XML" value="1" />
         </counts>
@@ -84,14 +88,14 @@
           <entry key="arff" value="202" />
           <entry key="csv" value="32" />
           <entry key="gradle" value="2" />
-          <entry key="java" value="7047" />
+          <entry key="java" value="8311" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSV" value="32" />
           <entry key="Groovy" value="2" />
-          <entry key="JAVA" value="7047" />
+          <entry key="JAVA" value="8311" />
           <entry key="PLAIN_TEXT" value="202" />
         </counts>
       </usages-collector>
@@ -102,8 +106,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="165" column="48" lean-forward="true" selection-start-line="165" selection-start-column="48" selection-end-line="165" selection-end-column="48" />
+            <state relative-caret-position="85">
+              <caret line="188" column="29" selection-start-line="188" selection-start-column="29" selection-end-line="188" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -115,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-train.arff">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -123,7 +127,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/core/DenseInstance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
+            <state relative-caret-position="1105">
               <caret line="85" column="9" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
             </state>
           </provider>
@@ -132,7 +136,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/simpleEducationalLearningSchemes/1.0.2/94b2536cdf933d32d06402701e24a727119490e0/simpleEducationalLearningSchemes-1.0.2-sources.jar!/weka/classifiers/trees/Id3.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
+            <state relative-caret-position="4097">
               <caret line="276" selection-start-line="276" selection-end-line="276" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -146,6 +150,21 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+              <folding>
+                <element signature="e#545#546#0" expanded="true" />
+                <element signature="e#613#614#0" expanded="true" />
+                <element signature="e#700#701#0" expanded="true" />
+                <element signature="e#761#762#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -179,6 +198,7 @@
       <find>ra</find>
       <find>entropy</find>
       <find>tostrin</find>
+      <find>rank: 1</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\Paul\.gradle\caches\modules-2\files-2.1\nz.ac.waikato.cms.weka\weka-stable\3.8.0\5f6547867e775b416982cdcaa2dbef67855a6669\weka-stable-3.8.0.jar!\weka</dir>
@@ -760,6 +780,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/tennis-train.arff" />
         <option value="$PROJECT_DIR$/src/main/java/revisionOperator/Variable.java" />
         <option value="$PROJECT_DIR$/src/main/resources/tennis-test.arff" />
+        <option value="$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java" />
         <option value="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" />
       </list>
     </option>
@@ -782,7 +803,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -841,13 +861,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566369029787" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566452527895" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -967,18 +988,20 @@
       <workItem from="1566150904264" duration="10628000" />
       <workItem from="1566192567910" duration="6113000" />
       <workItem from="1566243739004" duration="31073000" />
-      <workItem from="1566324088750" duration="24044000" />
+      <workItem from="1566324088750" duration="25313000" />
+      <workItem from="1566426878276" duration="19789000" />
+      <workItem from="1566503286377" duration="5849000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137438000" />
+    <option name="totallyTimeSpent" value="164345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16897655" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14925373" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -987,8 +1010,8 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3066089" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3066089" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -1004,7 +1027,7 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Maven Projects" order="5" />
-      <window_info anchor="right" id="Gradle" order="6" visible="true" weight="0.03837953" />
+      <window_info anchor="right" id="Gradle" order="6" visible="true" weight="0.041044775" />
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
@@ -1236,24 +1259,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_60/src.zip!/java/lang/Boolean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/core/Attribute.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="270" column="13" lean-forward="true" selection-start-line="270" selection-start-column="13" selection-end-line="270" selection-end-column="13" />
+        <state relative-caret-position="265">
+          <caret line="270" column="16" selection-start-line="270" selection-start-column="16" selection-end-line="270" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-dev/3.9.3/f98b5e44206be3c1578b62b8ef9e4c783c5b0688/weka-dev-3.9.3-sources.jar!/weka/core/Attribute.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="679" column="36" selection-start-line="679" selection-start-column="36" selection-end-line="679" selection-end-column="36" />
+        <state relative-caret-position="190">
+          <caret line="373" column="59" selection-start-line="373" selection-start-column="59" selection-end-line="373" selection-end-column="59" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_60/src.zip!/java/lang/Boolean.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-train.arff">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+        <state relative-caret-position="272">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/core/DenseInstance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="85" column="9" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/simpleEducationalLearningSchemes/1.0.2/94b2536cdf933d32d06402701e24a727119490e0/simpleEducationalLearningSchemes-1.0.2-sources.jar!/weka/classifiers/trees/Id3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4097">
+          <caret line="276" selection-start-line="276" selection-end-line="276" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1274,34 +1321,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/core/DenseInstance.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="85" column="9" selection-start-line="85" selection-start-column="9" selection-end-line="85" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/simpleEducationalLearningSchemes/1.0.2/94b2536cdf933d32d06402701e24a727119490e0/simpleEducationalLearningSchemes-1.0.2-sources.jar!/weka/classifiers/trees/Id3.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="276" selection-start-line="276" selection-end-line="276" />
+        <state relative-caret-position="289">
+          <caret line="25" column="37" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#545#546#0" expanded="true" />
+            <element signature="e#613#614#0" expanded="true" />
+            <element signature="e#700#701#0" expanded="true" />
+            <element signature="e#761#762#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-train.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="165" column="48" lean-forward="true" selection-start-line="165" selection-start-column="48" selection-end-line="165" selection-end-column="48" />
+        <state relative-caret-position="85">
+          <caret line="188" column="29" selection-start-line="188" selection-start-column="29" selection-end-line="188" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
