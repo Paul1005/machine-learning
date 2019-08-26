@@ -1,7 +1,7 @@
 @relation tennis-train
 
-@attribute Outlook {Sunny,Overcast}
-@attribute Temp. {Hot,Cool}
+@attribute Outlook {Sunny,Overcast,Rain}
+@attribute Temp. {Hot,Mild,Cool}
 @attribute Humidity {High,Normal}
 @attribute Wind {Weak,Strong}
 @attribute Decision {No,Yes}
@@ -10,12 +10,14 @@
 Sunny,Hot,High,Weak,No
 Sunny,Hot,High,Strong,No
 Overcast,Hot,High,Weak,Yes
-Overcast,Cool,High,Weak,Yes
-Overcast,Cool,Normal,Weak,Yes
-Overcast,Cool,Normal,Strong,No
-Sunny,Cool,High,Weak,No
+Rain,Mild,High,Weak,Yes
+Rain,Cool,Normal,Weak,Yes
+Rain,Cool,Normal,Strong,No
+Overcast,Cool,Normal,Strong,Yes
+Sunny,Mild,High,Weak,No
 Sunny,Cool,Normal,Weak,Yes
-Overcast,Cool,Normal,Weak,Yes
-Sunny,Cool,Normal,Strong,Yes
-Overcast,Cool,High,Strong,Yes
+Rain,Mild,Normal,Weak,Yes
+Sunny,Mild,Normal,Strong,Yes
+Overcast,Mild,High,Strong,Yes
 Overcast,Hot,Normal,Weak,Yes
+Rain,Mild,High,Strong,No

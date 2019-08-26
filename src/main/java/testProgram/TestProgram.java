@@ -66,7 +66,7 @@ public class TestProgram {
         System.out.println(evaluation.toClassDetailsString());
 
 
-        J48 j48 = new J48();
+        /*J48 j48 = new J48();
         String[] options = new String[3];
         options[0] = "-R";
         options[1] = "-N";
@@ -137,6 +137,6 @@ public class TestProgram {
 
         System.out.println(evaluation.toSummaryString());
         System.out.println(evaluation.toMatrixString());
-        System.out.println(evaluation.toClassDetailsString());
+        System.out.println(evaluation.toClassDetailsString());*/
     }
 }

@@ -1,5 +1,7 @@
 package revisionOperator;
 
+import cucumber.api.java.cs.A;
+import weka.classifiers.Evaluation;
 import weka.classifiers.trees.Id3;
 import weka.core.*;
 import weka.core.converters.ArffSaver;
@@ -9,6 +11,7 @@ import weka.core.converters.ConverterUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 
 /*
@@ -21,8 +24,6 @@ public class RevisionOperator {
     //private String trainingFile;
     //private String testingFile;
     private String filePath = "src/main/resources/";
-    private ArrayList<Attribute> attributes;
-    private ArrayList<String> attributeNames;
 
     public void run(String csvTrainingFile, String csvTestingFile) throws Exception {
         //trainingFile = csvTrainingFile + ".arff";
@@ -51,8 +52,8 @@ public class RevisionOperator {
         return instances;
     }
 
-    private Instances setUpData() throws Exception {
-        attributes = new ArrayList<>(5);
+    private Instances setUpData(String name) throws Exception {
+        ArrayList<Attribute> attributes = new ArrayList<>(5);
         ArrayList<String> outlook = new ArrayList<>();
         outlook.add("Overcast");
         outlook.add("Sunny");
@@ -69,7 +70,7 @@ public class RevisionOperator {
         decision.add("No");
         decision.add("Yes");
 
-        attributeNames = new ArrayList<>(5);
+        ArrayList<String> attributeNames = new ArrayList<>(5);
         attributeNames.add("Outlook");
         attributeNames.add("Temp.");
         attributeNames.add("Humidity");
@@ -82,83 +83,118 @@ public class RevisionOperator {
         attributes.add(new Attribute(attributeNames.get(3), wind));
         attributes.add(new Attribute(attributeNames.get(4), decision));
 
-        Instances instances = new Instances("tennis-test", attributes, 0);
+        Instances instances = new Instances(name, attributes, 0);
         instances.setClassIndex(instances.numAttributes() - 1);
         return instances;
     }
 
     private void processData() throws Exception {
-        Instances trainingInstances = setUpData();
+        Instances instanceK = setUpData("tennis-training");
+        ArrayList<Attribute> attributes = createAttributeList(instanceK.enumerateAttributes());
+        ArrayList<String> attributeNames = getAttributeNames(attributes);
+        Instances testingInstances = new Instances("tennis-testing", attributes, 0);
+        ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes);
+        ArrayList<String> belief = new ArrayList<>();
+        belief.add("False");
+        belief.add("True");
+        ArrayList<String> classificationAttributeNames = new ArrayList<>(attributeNames);
+        classificationAttributeNames.add("Believes");
+        classificationAttributes.add(new Attribute(classificationAttributeNames.get(5), belief));
+        Instances classificationInstances = new Instances("classification", classificationAttributes, 0);
 
-        addInitialSetK(", 1", trainingInstances); // add initial dataSet K
-        //addInstance("Wind, 0", trainingInstances);
-        //addInstance("!Outlook, 1", trainingInstances);
-        System.out.println(trainingInstances + "\n");
+        testingInstances.setClassIndex(testingInstances.numAttributes() - 1);
+
+        String phi = "!Outlook && !Temp. && Humidity && Wind && Yes";
+        addInstanceGeneric(phi, testingInstances, attributeNames);
+        String k = "!Outlook && !Temp. && !Humidity && !Wind && No";
+        addInstanceGeneric(k, instanceK, attributeNames); // add initial dataSet K
+        System.out.println(instanceK + "\n");
 
         Id3 id3 = new Id3();
-        id3.buildClassifier(trainingInstances);
-        System.out.println(id3 + "\n");
 
-        addInstance("Outlook, 0 ", trainingInstances);
+        String thing = "Outlook && !Temp. && !Humidity && !Wind && Yes";
+        addInstanceGeneric(thing, instanceK, attributeNames);
+        id3.buildClassifier(instanceK);
+        Evaluation evaluation = new Evaluation(instanceK);
+        evaluation.evaluateModel(id3, testingInstances);
 
-        System.out.println(trainingInstances + "\n");
-        /*double entropy = calculateEntropy(trainingInstances);
-        System.out.println(entropy);
+        if (evaluation.pctCorrect() == 100) {
+            thing = thing + " && True";
+        } else {
+            thing = thing + " && False";
+        }
+        addInstanceGeneric(thing, classificationInstances, classificationAttributeNames);
 
-        double outlookInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(0));
-        double temperatureInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(1));
-        double humidityInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(2));
-        double windInfoGain = calculateInformationGain(entropy, trainingInstances, attributeNames.get(3));
+        instanceK.remove(instanceK.size() - 1);
 
-        System.out.println(outlookInfoGain);
-        System.out.println(temperatureInfoGain);
-        System.out.println(humidityInfoGain);
-        System.out.println(windInfoGain);*/
+        thing = "!Outlook && Temp. && !Humidity && !Wind && Yes";
+        addInstanceGeneric(thing, instanceK, attributeNames);
+        evaluation.evaluateModel(id3, testingInstances);
+        id3.buildClassifier(instanceK);
+        if (evaluation.pctCorrect() == 100) {
+            thing = thing + " && True";
+        } else {
+            thing = thing + " && False";
+        }
+        addInstanceGeneric(thing, classificationInstances, classificationAttributeNames);
 
-        id3 = new Id3();
-        id3.buildClassifier(trainingInstances);
-        System.out.println(id3 + "\n");
+        instanceK.remove(instanceK.size() - 1);
 
-        ArrayList<Belief> solutions = determineSolutions(id3.toString(), trainingInstances);
+        thing = "!Outlook && !Temp. && Humidity && !Wind && Yes";
+        addInstanceGeneric(thing, instanceK, attributeNames);
+        id3.buildClassifier(instanceK);
+        evaluation.evaluateModel(id3, testingInstances);
 
-        System.out.println(solutions);
-        System.out.println(solutions.size());
+        if (evaluation.pctCorrect() == 100) {
+            thing = thing + " && True";
+        } else {
+            thing = thing + " && False";
+        }
+        addInstanceGeneric(thing, classificationInstances, classificationAttributeNames);
 
-        addInstance("Temp., 0", trainingInstances);
+        instanceK.remove(instanceK.size() - 1);
 
-        System.out.println(trainingInstances + "\n");
+        thing = "!Outlook && !Temp. && !Humidity && Wind && Yes";
+        addInstanceGeneric(thing, instanceK, attributeNames);
+        id3.buildClassifier(instanceK);
+        evaluation.evaluateModel(id3, testingInstances);
 
-        id3 = new Id3();
-        id3.buildClassifier(trainingInstances);
-        System.out.println(id3 + "\n");
+        if (evaluation.pctCorrect() == 100) {
+            thing = thing + " && True";
+        } else {
+            thing = thing + " && False";
+        }
+        addInstanceGeneric(thing, classificationInstances, classificationAttributeNames);
 
-        addInstance("Temp. && Humidity, 1", trainingInstances);
+        instanceK.remove(instanceK.size() - 1);
 
-        System.out.println(trainingInstances + "\n");
-
-        id3 = new Id3();
-        id3.buildClassifier(trainingInstances);
-        System.out.println(id3 + "\n");
-
-        addInstance("!Temp., 0", trainingInstances);
-
-        System.out.println(trainingInstances + "\n");
-
-        id3 = new Id3();
-        id3.buildClassifier(trainingInstances);
-        System.out.println(id3 + "\n");
-
-        addInstance("!Temp. && !Humidity, 1", trainingInstances);
-
-        System.out.println(trainingInstances + "\n");
-
-        id3 = new Id3();
-        id3.buildClassifier(trainingInstances);
-        System.out.println(id3 + "\n");
-
+        Id3 classifier = new Id3();
+        classifier.buildClassifier(classificationInstances);
+        Evaluation classificationEvaluation = new Evaluation(classificationInstances);
+        Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0);
+        String omega = "Outlook && Temp. && Humidity && Wind && Yes && True";
+        addInstanceGeneric(omega, classifierTester, classificationAttributeNames);
+        classificationEvaluation.evaluateModel(classifier, classifierTester);
     }
 
-    private ArrayList<Belief> determineSolutions(String tree, Instances instances) {
+    private ArrayList<String> getAttributeNames(ArrayList<Attribute> attributes) {
+        ArrayList<String> attributeNames = new ArrayList<>();
+        for (Attribute attribute : attributes) {
+            attributeNames.add(attribute.name());
+        }
+
+        return attributeNames;
+    }
+
+    private ArrayList<Attribute> createAttributeList(Enumeration<Attribute> enumerateAttributes) {
+        ArrayList<Attribute> attributes = new ArrayList<>();
+        while (enumerateAttributes.hasMoreElements()) {
+            attributes.add(enumerateAttributes.nextElement());
+        }
+        return attributes;
+    }
+
+    private ArrayList<Belief> determineSolutions(String tree, Instances instances, ArrayList<Attribute> attributes, ArrayList<String> attributeNames) {
         String[] lines = tree.split("\n");
         ArrayList<HashMap<String, String>> solutions = new ArrayList<>();
         for (int i = 0; i < lines.length; i++) {
@@ -204,7 +240,7 @@ public class RevisionOperator {
                         int value = (i / (int) Math.pow(2, k)) % 2;
                         belief.put(attributeNames.get(j), attributes.get(j).value(value));
                         k++;
-                    } else{
+                    } else {
                         belief.put(attributeNames.get(j), solution.get(attributeNames.get(j)));
                     }
                 }
@@ -213,20 +249,20 @@ public class RevisionOperator {
         }
 
         for (Instance instance : instances) {
-            for (int i = 0; i < beliefs.size(); i++) {
+            for (Belief belief : beliefs) {
                 boolean isIdentical = true;
-                for (int j = 0; j < attributeNames.size()-1; j++) {
-                    isIdentical = isIdentical && instance.stringValue(j).equals(beliefs.get(i).getSolution().get(attributeNames.get(j)));
+                for (int j = 0; j < attributeNames.size() - 1; j++) {
+                    isIdentical = isIdentical && instance.stringValue(j).equals(belief.getSolution().get(attributeNames.get(j)));
                 }
                 if (isIdentical) {
-                    beliefs.get(i).increaseRank();
+                    belief.increaseRank();
                 }
             }
         }
         return beliefs;
     }
 
-    private double calculateInformationGain(double entropy, Instances instances, String attribute) {
+    private double calculateInformationGain(double entropy, Instances instances, String attribute, ArrayList<Attribute> attributes, ArrayList<String> attributeNames) {
         double numInstances = instances.size();
         double numPositives = 0;
         double numNegatives = 0;
@@ -278,14 +314,38 @@ public class RevisionOperator {
         return -numPositives / numInstances * logOfBase2(numPositives / numInstances) - numNegatives / numInstances * logOfBase2(numNegatives / numInstances);
     }
 
-    public double logOfBase2(double num) {
+    private double logOfBase2(double num) {
         if (num == 0) {
             return Double.MAX_VALUE;
         }
         return Math.log(num) / Math.log(2);
     }
 
-    private void addInitialSetK(String k, Instances instances) throws Exception {
+    private void addInstanceGeneric(String instance, Instances instances, ArrayList<String> attributeNames) {
+        String[] terms = instance.split(" && ");
+
+        double[] newInstance = new double[instances.numAttributes()];
+
+        for (int i = 0; i < newInstance.length; i++) {
+            for (String term : terms) {
+                if (term.charAt(0) == '!') {
+                    if (term.equals(attributeNames.get(i))) {
+                        newInstance[i] = 0;
+                        break;
+                    }
+                } else {
+                    if (term.equals(attributeNames.get(i))) {
+                        newInstance[i] = 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        instances.add(new DenseInstance(1.0, newInstance));
+    }
+
+    private void addInitialSetK(String k, Instances instances, ArrayList<String> attributeNames) {
         String[] splitLine = k.split(", ");
         String[] terms = splitLine[0].split(" && ");
 
@@ -306,7 +366,7 @@ public class RevisionOperator {
         instances.add(new DenseInstance(1.0, newInstance));
     }
 
-    private void addInstance(String newLine, Instances instances) throws Exception {
+    private void addInstance(String newLine, Instances instances, ArrayList<String> attributeNames) {
         String[] splitLine = newLine.split(", ");
         String[] terms = splitLine[0].split(" && ");
 
