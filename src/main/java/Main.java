@@ -1,6 +1,8 @@
 import revisionOperator.RevisionOperator;
 import testProgram.TestProgram;
 
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) throws Exception {
 
@@ -14,7 +16,12 @@ public class Main {
         //testProgram.transformData();
         //testProgram.processData();
 
+        ArrayList<String> beliefSetK = new ArrayList<>();
+        beliefSetK.add("!Outlook && !Temp. && !Humidity && !Wind && !Decision");
+        String phi = "Outlook && !Temp. && !Humidity && Wind && Decision";
+        String omega = "Outlook && Temp. && Humidity && Wind && Decision";
+
         RevisionOperator revisionOperator = new RevisionOperator();
-        revisionOperator.run("tennis-train", "tennis-test");
+        revisionOperator.processData(beliefSetK, phi, omega);
     }
 }

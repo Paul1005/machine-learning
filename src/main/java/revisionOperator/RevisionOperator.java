@@ -23,13 +23,13 @@ public class RevisionOperator {
     //private String testingFile;
     private String filePath = "src/main/resources/";
 
-    public void run(String csvTrainingFile, String csvTestingFile) throws Exception {
+   /* public void run(String csvTrainingFile, String csvTestingFile) throws Exception {
         //trainingFile = csvTrainingFile + ".arff";
         //testingFile = csvTestingFile + ".arff";
         //transformData(csvTrainingFile);
         //transformData(csvTestingFile);
         processData();
-    }
+    }*/
 
     private void transformData(String csvFile) throws IOException {
         CSVLoader csvLoader = new CSVLoader();
@@ -50,7 +50,7 @@ public class RevisionOperator {
         return instances;
     }
 
-    private ArrayList<String> setUpAttributeNames(){
+    private ArrayList<String> setUpAttributeNames() {
         ArrayList<String> attributeNames = new ArrayList<>(5);
         attributeNames.add("Outlook");
         attributeNames.add("Temp.");
@@ -60,7 +60,7 @@ public class RevisionOperator {
         return attributeNames;
     }
 
-    private ArrayList<Attribute> setUpAttributes(ArrayList<String> attributeNames){
+    private ArrayList<Attribute> setUpAttributes(ArrayList<String> attributeNames) {
         ArrayList<Attribute> attributes = new ArrayList<>(5);
         ArrayList<String> outlook = new ArrayList<>();
         outlook.add("Overcast");
@@ -87,62 +87,60 @@ public class RevisionOperator {
         return attributes;
     }
 
-    private void processData() throws Exception {
+    public void processData(ArrayList<String> beliefSetK, String phi, String omega) throws Exception {
         ArrayList<String> attributeNames = setUpAttributeNames();
         ArrayList<Attribute> attributes = setUpAttributes(attributeNames);
-        Instances instanceK = new Instances("tennis-training", attributes, 0);
-        Instances testingInstances = new Instances("tennis-testing", attributes, 0);
-        testingInstances.setClassIndex(testingInstances.numAttributes() - 1);
 
-        ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes);
+        Instances kInstances = new Instances("tennis-training", attributes, 0);
+        kInstances.setClassIndex(kInstances.numAttributes() - 1);
+        for (String k : beliefSetK) {
+            addInstanceGeneric(k, kInstances, attributeNames);
+        }
+        System.out.println(kInstances + "\n");
+
+        Instances phiInstance = new Instances("tennis-testing", attributes, 0);
+        phiInstance.setClassIndex(phiInstance.numAttributes() - 1);
+        addInstanceGeneric(phi, phiInstance, attributeNames);
+
         ArrayList<String> belief = new ArrayList<>();
         belief.add("False");
         belief.add("True");
+
         ArrayList<String> classificationAttributeNames = new ArrayList<>(attributeNames);
         classificationAttributeNames.add("Believes");
+
+        ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes);
         classificationAttributes.add(new Attribute(classificationAttributeNames.get(5), belief));
-        instanceK.setClassIndex(instanceK.numAttributes() - 1);
 
         Instances classificationInstances = new Instances("classification", classificationAttributes, 0);
         classificationInstances.setClassIndex(classificationInstances.numAttributes() - 1);
 
-        String phi = "!Outlook && !Temp. && Humidity && Wind && Decision";
-        addInstanceGeneric(phi, testingInstances, attributeNames);
-
-        String k = "!Outlook && !Temp. && !Humidity && !Wind && !Decision";
-        addInstanceGeneric(k, instanceK, attributeNames); // add initial dataSet K
-
-        reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, "Outlook && !Temp. && !Humidity && !Wind && Decision");
-        reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, "!Outlook && Temp. && !Humidity && !Wind && Decision");
-        reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, "!Outlook && !Temp. && Humidity && !Wind && Decision");
-        reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, "!Outlook && !Temp. && !Humidity && Wind && Decision");
+        reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, "Outlook && !Temp. && !Humidity && !Wind && Decision");
+        reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, "!Outlook && Temp. && !Humidity && !Wind && Decision");
+        reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, "!Outlook && !Temp. && Humidity && !Wind && Decision");
+        reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, "!Outlook && !Temp. && !Humidity && Wind && Decision");
 
         Id3 classifier = new Id3();
         classifier.buildClassifier(classificationInstances);
         System.out.println(classificationInstances + "\n");
         System.out.println(classifier + "\n");
 
-        Evaluation classificationEvaluation = new Evaluation(classificationInstances);
         Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0);
         classifierTester.setClassIndex(classifierTester.numAttributes() - 1);
+        addInstanceGeneric(omega + " && Believes", classifierTester, classificationAttributeNames);
 
-        String omega = "Outlook && Temp. && Humidity && Wind && Decision";
-        double isPhiBelieved = reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, omega);
-        classificationInstances.remove(classificationInstances.size() - 1);
-
-        addInstanceGeneric(omega +  " && Believes", classifierTester, classificationAttributeNames);
-
+        Evaluation classificationEvaluation = new Evaluation(classificationInstances);
         classificationEvaluation.evaluateModel(classifier, classifierTester);
 
+        double isPhiBelieved = reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, omega);
         if (isPhiBelieved == classificationEvaluation.pctCorrect()) {
-            System.out.println("works");
-            if(classificationEvaluation.pctCorrect() == 100){
-                System.out.println("revising by omega will cause us to believe phi");
+            if (classificationEvaluation.pctCorrect() == 100) {
+                System.out.println("revising belief set K by omega will cause us to believe phi");
             } else {
-                System.out.println("revising by omega will not cause us to believe phi");
+                System.out.println("revising belief set K by omega will not cause us to believe phi");
             }
         } else {
-            System.out.println("doesn't work");
+            System.out.println("Our prediction was wrong");
         }
     }
 
