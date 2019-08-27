@@ -10,8 +10,6 @@ import weka.core.converters.ConverterUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashMap;
 
 /*
@@ -114,101 +112,59 @@ public class RevisionOperator {
         String k = "!Outlook && !Temp. && !Humidity && !Wind && !Decision";
         addInstanceGeneric(k, instanceK, attributeNames); // add initial dataSet K
 
+        reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, "Outlook && !Temp. && !Humidity && !Wind && Decision");
+        reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, "!Outlook && Temp. && !Humidity && !Wind && Decision");
+        reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, "!Outlook && !Temp. && Humidity && !Wind && Decision");
+        reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, "!Outlook && !Temp. && !Humidity && Wind && Decision");
+
+        Id3 classifier = new Id3();
+        classifier.buildClassifier(classificationInstances);
+        System.out.println(classificationInstances + "\n");
+        System.out.println(classifier + "\n");
+
+        Evaluation classificationEvaluation = new Evaluation(classificationInstances);
+        Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0);
+        classifierTester.setClassIndex(classifierTester.numAttributes() - 1);
+
+        String omega = "Outlook && Temp. && Humidity && Wind && Decision";
+        double isPhiBelieved = reviseAndTest(attributeNames, instanceK, testingInstances, classificationAttributeNames, classificationInstances, omega);
+        classificationInstances.remove(classificationInstances.size() - 1);
+
+        addInstanceGeneric(omega +  " && Believes", classifierTester, classificationAttributeNames);
+
+        classificationEvaluation.evaluateModel(classifier, classifierTester);
+
+        if (isPhiBelieved == classificationEvaluation.pctCorrect()) {
+            System.out.println("works");
+            if(classificationEvaluation.pctCorrect() == 100){
+                System.out.println("revising by omega will cause us to believe phi");
+            } else {
+                System.out.println("revising by omega will not cause us to believe phi");
+            }
+        } else {
+            System.out.println("doesn't work");
+        }
+    }
+
+    private double reviseAndTest(ArrayList<String> attributeNames, Instances instanceK, Instances testingInstances, ArrayList<String> classificationAttributeNames, Instances classificationInstances, String revision) throws Exception {
         Id3 id3 = new Id3();
-        String newInstance = "Outlook && !Temp. && !Humidity && !Wind && Decision";
-        addInstanceGeneric(newInstance, instanceK, attributeNames);
+        addInstanceGeneric(revision, instanceK, attributeNames);
         id3.buildClassifier(instanceK);
+        System.out.println(instanceK + "\n");
         System.out.println(id3 + "\n");
 
         Evaluation evaluation = new Evaluation(instanceK);
         evaluation.evaluateModel(id3, testingInstances);
 
         if (evaluation.pctCorrect() == 100) {
-            newInstance = newInstance + " && Believes";
+            revision = revision + " && Believes";
         } else {
-            newInstance = newInstance + " && !Believes";
+            revision = revision + " && !Believes";
         }
-        addInstanceGeneric(newInstance, classificationInstances, classificationAttributeNames);
+        addInstanceGeneric(revision, classificationInstances, classificationAttributeNames);
 
         instanceK.remove(instanceK.size() - 1);
-
-        id3 = new Id3();
-        newInstance = "!Outlook && Temp. && !Humidity && !Wind && Decision";
-        addInstanceGeneric(newInstance, instanceK, attributeNames);
-        id3.buildClassifier(instanceK);
-        System.out.println(id3 + "\n");
-        evaluation = new Evaluation(instanceK);
-        evaluation.evaluateModel(id3, testingInstances);
-
-        if (evaluation.pctCorrect() == 100) {
-            newInstance = newInstance + " && Believes";
-        } else {
-            newInstance = newInstance + " && !Believes";
-        }
-        addInstanceGeneric(newInstance, classificationInstances, classificationAttributeNames);
-
-        instanceK.remove(instanceK.size() - 1);
-
-        id3 = new Id3();
-        newInstance = "!Outlook && !Temp. && Humidity && !Wind && Decision";
-        addInstanceGeneric(newInstance, instanceK, attributeNames);
-        id3.buildClassifier(instanceK);
-        System.out.println(id3 + "\n");
-        evaluation = new Evaluation(instanceK);
-        evaluation.evaluateModel(id3, testingInstances);
-
-        if (evaluation.pctCorrect() == 100) {
-            newInstance = newInstance + " && Believes";
-        } else {
-            newInstance = newInstance + " && !Believes";
-        }
-        addInstanceGeneric(newInstance, classificationInstances, classificationAttributeNames);
-
-        instanceK.remove(instanceK.size() - 1);
-
-        id3 = new Id3();
-        newInstance = "!Outlook && !Temp. && !Humidity && Wind && Decision";
-        addInstanceGeneric(newInstance, instanceK, attributeNames);
-        id3.buildClassifier(instanceK);
-        System.out.println(id3 + "\n");
-        evaluation = new Evaluation(instanceK);
-        evaluation.evaluateModel(id3, testingInstances);
-
-        if (evaluation.pctCorrect() == 100) {
-            newInstance = newInstance + " && Believes";
-        } else {
-            newInstance = newInstance + " && !Believes";
-        }
-        addInstanceGeneric(newInstance, classificationInstances, classificationAttributeNames);
-
-        instanceK.remove(instanceK.size() - 1);
-
-        Id3 classifier = new Id3();
-        classifier.buildClassifier(classificationInstances);
-        System.out.println(classifier + "\n");
-        System.out.println(classificationInstances + "\n");
-
-        Evaluation classificationEvaluation = new Evaluation(classificationInstances);
-        Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0);
-        classifierTester.setClassIndex(classifierTester.numAttributes() - 1);
-
-        id3 = new Id3();
-        String omega = "Outlook && Temp. && Humidity && Wind && Decision";
-        addInstanceGeneric(omega, instanceK, attributeNames);
-        id3.buildClassifier(instanceK);
-        System.out.println(id3 + "\n");
-        evaluation = new Evaluation(instanceK);
-        evaluation.evaluateModel(id3, testingInstances);
-
-        addInstanceGeneric(omega +  " && Believes", classifierTester, classificationAttributeNames);
-
-        classificationEvaluation.evaluateModel(classifier, classifierTester);
-
-        if (evaluation.pctCorrect() == classificationEvaluation.pctCorrect()) {
-            System.out.println("works");
-        } else {
-            System.out.println("doesn't work");
-        }
+        return evaluation.pctCorrect();
     }
 
     private ArrayList<String> getAttributeNames(ArrayList<Attribute> attributes) {
