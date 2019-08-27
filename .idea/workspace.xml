@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15bb43a3-06eb-4bdb-a5f1-41952ab92d6e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/revisionOperator/RevisionOperator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/revisionOperator/RevisionOperator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/testProgram/TestProgram.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/testProgram/TestProgram.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/tennis-test.arff" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/tennis-test.arff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/tennis-train.arff" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/tennis-train.arff" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/testProgram/TestProgram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/testProgram/TestProgram.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tennis-test.arff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/tennis-test.arff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tennis-train.arff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/tennis-train.arff" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -96,14 +87,14 @@
           <entry key="arff" value="202" />
           <entry key="csv" value="32" />
           <entry key="gradle" value="2" />
-          <entry key="java" value="9769" />
+          <entry key="java" value="10239" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSV" value="32" />
           <entry key="Groovy" value="2" />
-          <entry key="JAVA" value="9769" />
+          <entry key="JAVA" value="10239" />
           <entry key="PLAIN_TEXT" value="202" />
         </counts>
       </usages-collector>
@@ -114,8 +105,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="625">
-              <caret line="177" lean-forward="true" selection-start-line="177" selection-end-line="177" />
+            <state relative-caret-position="286">
+              <caret line="117" column="16" lean-forward="true" selection-start-line="116" selection-end-line="132" selection-end-column="47" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -132,11 +126,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/classifiers/Evaluation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13447">
-              <caret line="860" column="5" selection-start-line="860" selection-start-column="5" selection-end-line="860" selection-end-column="5" />
+            <state relative-caret-position="155">
+              <caret line="872" selection-start-line="872" selection-end-line="872" />
               <folding>
                 <element signature="e#27857#27858#0" expanded="true" />
                 <element signature="e#27894#27895#0" expanded="true" />
+                <element signature="e#28185#28186#0" expanded="true" />
                 <element signature="e#34221#34222#0" expanded="true" />
                 <element signature="e#34266#34267#0" expanded="true" />
               </folding>
@@ -195,8 +190,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+            <state relative-caret-position="204">
+              <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -801,9 +796,9 @@
         <option value="$PROJECT_DIR$/src/main/resources/tennis-train.arff" />
         <option value="$PROJECT_DIR$/src/main/java/revisionOperator/Variable.java" />
         <option value="$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/resources/tennis-test.arff" />
         <option value="$PROJECT_DIR$/src/main/java/testProgram/TestProgram.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" />
       </list>
     </option>
@@ -891,7 +886,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566806003444" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566883675629" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -1018,18 +1013,18 @@
       <workItem from="1566623567386" duration="4092000" />
       <workItem from="1566671674789" duration="5505000" />
       <workItem from="1566757375088" duration="9491000" />
-      <workItem from="1566848761059" duration="2240000" />
+      <workItem from="1566848761059" duration="16818000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="189697000" />
+    <option name="totallyTimeSpent" value="204275000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15724947" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15724947" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -1038,7 +1033,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3066089" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3066089" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1055,7 +1050,7 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Maven Projects" order="5" />
-      <window_info anchor="right" id="Gradle" order="6" visible="true" weight="0.11353944" />
+      <window_info anchor="right" id="Gradle" order="6" visible="true" weight="0.11247335" />
       <window_info anchor="right" id="Database" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
@@ -1308,30 +1303,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="177" lean-forward="true" selection-start-line="177" selection-end-line="177" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/testProgram/TestProgram.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="799">
           <caret line="63" column="55" selection-start-line="63" selection-start-column="55" selection-end-line="63" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/classifiers/Evaluation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13447">
-          <caret line="860" column="5" selection-start-line="860" selection-start-column="5" selection-end-line="860" selection-end-column="5" />
-          <folding>
-            <element signature="e#27857#27858#0" expanded="true" />
-            <element signature="e#27894#27895#0" expanded="true" />
-            <element signature="e#34221#34222#0" expanded="true" />
-            <element signature="e#34266#34267#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1375,8 +1350,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+        <state relative-caret-position="204">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/classifiers/Evaluation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="872" selection-start-line="872" selection-end-line="872" />
+          <folding>
+            <element signature="e#27857#27858#0" expanded="true" />
+            <element signature="e#27894#27895#0" expanded="true" />
+            <element signature="e#28185#28186#0" expanded="true" />
+            <element signature="e#34221#34222#0" expanded="true" />
+            <element signature="e#34266#34267#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="117" column="16" lean-forward="true" selection-start-line="116" selection-end-line="132" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

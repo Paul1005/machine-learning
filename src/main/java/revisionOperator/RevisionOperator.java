@@ -1,6 +1,5 @@
 package revisionOperator;
 
-import cucumber.api.java.cs.A;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.Id3;
 import weka.core.*;
@@ -11,6 +10,7 @@ import weka.core.converters.ConverterUtils;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 
@@ -52,7 +52,17 @@ public class RevisionOperator {
         return instances;
     }
 
-    private Instances setUpData(String name) throws Exception {
+    private ArrayList<String> setUpAttributeNames(){
+        ArrayList<String> attributeNames = new ArrayList<>(5);
+        attributeNames.add("Outlook");
+        attributeNames.add("Temp.");
+        attributeNames.add("Humidity");
+        attributeNames.add("Wind");
+        attributeNames.add("Decision");
+        return attributeNames;
+    }
+
+    private ArrayList<Attribute> setUpAttributes(ArrayList<String> attributeNames){
         ArrayList<Attribute> attributes = new ArrayList<>(5);
         ArrayList<String> outlook = new ArrayList<>();
         outlook.add("Overcast");
@@ -70,29 +80,22 @@ public class RevisionOperator {
         decision.add("No");
         decision.add("Yes");
 
-        ArrayList<String> attributeNames = new ArrayList<>(5);
-        attributeNames.add("Outlook");
-        attributeNames.add("Temp.");
-        attributeNames.add("Humidity");
-        attributeNames.add("Wind");
-        attributeNames.add("Decision");
-
         attributes.add(new Attribute(attributeNames.get(0), outlook));
         attributes.add(new Attribute(attributeNames.get(1), temp));
         attributes.add(new Attribute(attributeNames.get(2), humidity));
         attributes.add(new Attribute(attributeNames.get(3), wind));
         attributes.add(new Attribute(attributeNames.get(4), decision));
 
-        Instances instances = new Instances(name, attributes, 0);
-        instances.setClassIndex(instances.numAttributes() - 1);
-        return instances;
+        return attributes;
     }
 
     private void processData() throws Exception {
-        Instances instanceK = setUpData("tennis-training");
-        ArrayList<Attribute> attributes = createAttributeList(instanceK.enumerateAttributes());
-        ArrayList<String> attributeNames = getAttributeNames(attributes);
+        ArrayList<String> attributeNames = setUpAttributeNames();
+        ArrayList<Attribute> attributes = setUpAttributes(attributeNames);
+        Instances instanceK = new Instances("tennis-training", attributes, 0);
         Instances testingInstances = new Instances("tennis-testing", attributes, 0);
+        testingInstances.setClassIndex(testingInstances.numAttributes() - 1);
+
         ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes);
         ArrayList<String> belief = new ArrayList<>();
         belief.add("False");
@@ -100,81 +103,112 @@ public class RevisionOperator {
         ArrayList<String> classificationAttributeNames = new ArrayList<>(attributeNames);
         classificationAttributeNames.add("Believes");
         classificationAttributes.add(new Attribute(classificationAttributeNames.get(5), belief));
+        instanceK.setClassIndex(instanceK.numAttributes() - 1);
+
         Instances classificationInstances = new Instances("classification", classificationAttributes, 0);
+        classificationInstances.setClassIndex(classificationInstances.numAttributes() - 1);
 
-        testingInstances.setClassIndex(testingInstances.numAttributes() - 1);
-
-        String phi = "!Outlook && !Temp. && Humidity && Wind && Yes";
+        String phi = "!Outlook && !Temp. && Humidity && Wind && Decision";
         addInstanceGeneric(phi, testingInstances, attributeNames);
-        String k = "!Outlook && !Temp. && !Humidity && !Wind && No";
+
+        String k = "!Outlook && !Temp. && !Humidity && !Wind && !Decision";
         addInstanceGeneric(k, instanceK, attributeNames); // add initial dataSet K
-        System.out.println(instanceK + "\n");
 
         Id3 id3 = new Id3();
-
-        String thing = "Outlook && !Temp. && !Humidity && !Wind && Yes";
-        addInstanceGeneric(thing, instanceK, attributeNames);
+        String newInstance = "Outlook && !Temp. && !Humidity && !Wind && Decision";
+        addInstanceGeneric(newInstance, instanceK, attributeNames);
         id3.buildClassifier(instanceK);
+        System.out.println(id3 + "\n");
+
         Evaluation evaluation = new Evaluation(instanceK);
         evaluation.evaluateModel(id3, testingInstances);
 
         if (evaluation.pctCorrect() == 100) {
-            thing = thing + " && True";
+            newInstance = newInstance + " && Believes";
         } else {
-            thing = thing + " && False";
+            newInstance = newInstance + " && !Believes";
         }
-        addInstanceGeneric(thing, classificationInstances, classificationAttributeNames);
+        addInstanceGeneric(newInstance, classificationInstances, classificationAttributeNames);
 
         instanceK.remove(instanceK.size() - 1);
 
-        thing = "!Outlook && Temp. && !Humidity && !Wind && Yes";
-        addInstanceGeneric(thing, instanceK, attributeNames);
-        evaluation.evaluateModel(id3, testingInstances);
+        id3 = new Id3();
+        newInstance = "!Outlook && Temp. && !Humidity && !Wind && Decision";
+        addInstanceGeneric(newInstance, instanceK, attributeNames);
         id3.buildClassifier(instanceK);
+        System.out.println(id3 + "\n");
+        evaluation = new Evaluation(instanceK);
+        evaluation.evaluateModel(id3, testingInstances);
+
         if (evaluation.pctCorrect() == 100) {
-            thing = thing + " && True";
+            newInstance = newInstance + " && Believes";
         } else {
-            thing = thing + " && False";
+            newInstance = newInstance + " && !Believes";
         }
-        addInstanceGeneric(thing, classificationInstances, classificationAttributeNames);
+        addInstanceGeneric(newInstance, classificationInstances, classificationAttributeNames);
 
         instanceK.remove(instanceK.size() - 1);
 
-        thing = "!Outlook && !Temp. && Humidity && !Wind && Yes";
-        addInstanceGeneric(thing, instanceK, attributeNames);
+        id3 = new Id3();
+        newInstance = "!Outlook && !Temp. && Humidity && !Wind && Decision";
+        addInstanceGeneric(newInstance, instanceK, attributeNames);
         id3.buildClassifier(instanceK);
+        System.out.println(id3 + "\n");
+        evaluation = new Evaluation(instanceK);
         evaluation.evaluateModel(id3, testingInstances);
 
         if (evaluation.pctCorrect() == 100) {
-            thing = thing + " && True";
+            newInstance = newInstance + " && Believes";
         } else {
-            thing = thing + " && False";
+            newInstance = newInstance + " && !Believes";
         }
-        addInstanceGeneric(thing, classificationInstances, classificationAttributeNames);
+        addInstanceGeneric(newInstance, classificationInstances, classificationAttributeNames);
 
         instanceK.remove(instanceK.size() - 1);
 
-        thing = "!Outlook && !Temp. && !Humidity && Wind && Yes";
-        addInstanceGeneric(thing, instanceK, attributeNames);
+        id3 = new Id3();
+        newInstance = "!Outlook && !Temp. && !Humidity && Wind && Decision";
+        addInstanceGeneric(newInstance, instanceK, attributeNames);
         id3.buildClassifier(instanceK);
+        System.out.println(id3 + "\n");
+        evaluation = new Evaluation(instanceK);
         evaluation.evaluateModel(id3, testingInstances);
 
         if (evaluation.pctCorrect() == 100) {
-            thing = thing + " && True";
+            newInstance = newInstance + " && Believes";
         } else {
-            thing = thing + " && False";
+            newInstance = newInstance + " && !Believes";
         }
-        addInstanceGeneric(thing, classificationInstances, classificationAttributeNames);
+        addInstanceGeneric(newInstance, classificationInstances, classificationAttributeNames);
 
         instanceK.remove(instanceK.size() - 1);
 
         Id3 classifier = new Id3();
         classifier.buildClassifier(classificationInstances);
+        System.out.println(classifier + "\n");
+        System.out.println(classificationInstances + "\n");
+
         Evaluation classificationEvaluation = new Evaluation(classificationInstances);
         Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0);
-        String omega = "Outlook && Temp. && Humidity && Wind && Yes && True";
-        addInstanceGeneric(omega, classifierTester, classificationAttributeNames);
+        classifierTester.setClassIndex(classifierTester.numAttributes() - 1);
+
+        id3 = new Id3();
+        String omega = "Outlook && Temp. && Humidity && Wind && Decision";
+        addInstanceGeneric(omega, instanceK, attributeNames);
+        id3.buildClassifier(instanceK);
+        System.out.println(id3 + "\n");
+        evaluation = new Evaluation(instanceK);
+        evaluation.evaluateModel(id3, testingInstances);
+
+        addInstanceGeneric(omega +  " && Believes", classifierTester, classificationAttributeNames);
+
         classificationEvaluation.evaluateModel(classifier, classifierTester);
+
+        if (evaluation.pctCorrect() == classificationEvaluation.pctCorrect()) {
+            System.out.println("works");
+        } else {
+            System.out.println("doesn't work");
+        }
     }
 
     private ArrayList<String> getAttributeNames(ArrayList<Attribute> attributes) {
@@ -184,14 +218,6 @@ public class RevisionOperator {
         }
 
         return attributeNames;
-    }
-
-    private ArrayList<Attribute> createAttributeList(Enumeration<Attribute> enumerateAttributes) {
-        ArrayList<Attribute> attributes = new ArrayList<>();
-        while (enumerateAttributes.hasMoreElements()) {
-            attributes.add(enumerateAttributes.nextElement());
-        }
-        return attributes;
     }
 
     private ArrayList<Belief> determineSolutions(String tree, Instances instances, ArrayList<Attribute> attributes, ArrayList<String> attributeNames) {

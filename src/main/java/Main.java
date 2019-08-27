@@ -10,11 +10,11 @@ public class Main {
         //NaiveBayesDemo.process();
         //RandomForestDemo.process();
         //SMODemo.process();
-        TestProgram testProgram = new TestProgram();
-        testProgram.transformData();
-        testProgram.processData();
+        //TestProgram testProgram = new TestProgram();
+        //testProgram.transformData();
+        //testProgram.processData();
 
-        //RevisionOperator revisionOperator = new RevisionOperator();
-        //revisionOperator.run("tennis-train", "tennis-test");
+        RevisionOperator revisionOperator = new RevisionOperator();
+        revisionOperator.run("tennis-train", "tennis-test");
     }
 }
