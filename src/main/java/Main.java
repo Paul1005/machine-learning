@@ -17,11 +17,19 @@ public class Main {
         //testProgram.processData();
 
         ArrayList<String> beliefSetK = new ArrayList<>();
-        beliefSetK.add("!Outlook && !Temp. && !Humidity && !Wind && !Decision");
+        beliefSetK.add("!Outlook && !Temp. && !Humidity && !Wind && !Decision"); // make sure these are in the same order as the attributes
+
         String phi = "Outlook && !Temp. && !Humidity && Wind && Decision";
         String omega = "Outlook && Temp. && Humidity && Wind && Decision";
 
+        ArrayList<String> revisions = new ArrayList<>();
+        revisions.add("Outlook && !Temp. && !Humidity && !Wind && Decision");
+        revisions.add("!Outlook && Temp. && !Humidity && !Wind && Decision");
+        revisions.add("!Outlook && !Temp. && Humidity && !Wind && Decision");
+        revisions.add("!Outlook && !Temp. && !Humidity && Wind && Decision");
+
         RevisionOperator revisionOperator = new RevisionOperator();
-        revisionOperator.processData(beliefSetK, phi, omega);
+        //revisionOperator.processData(beliefSetK, phi, omega, revisions);
+        revisionOperator.reviseData(beliefSetK, phi, omega, revisions);
     }
 }

@@ -3,12 +3,7 @@ package revisionOperator;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.Id3;
 import weka.core.*;
-import weka.core.converters.ArffSaver;
-import weka.core.converters.CSVLoader;
-import weka.core.converters.ConverterUtils;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,36 +14,6 @@ Also the case where we have to discard one of our old beliefs, not sure what to 
 Add new belief, if logically consistent, keep old ones, if not discard something?
  */
 public class RevisionOperator {
-    //private String trainingFile;
-    //private String testingFile;
-    private String filePath = "src/main/resources/";
-
-   /* public void run(String csvTrainingFile, String csvTestingFile) throws Exception {
-        //trainingFile = csvTrainingFile + ".arff";
-        //testingFile = csvTestingFile + ".arff";
-        //transformData(csvTrainingFile);
-        //transformData(csvTestingFile);
-        processData();
-    }*/
-
-    private void transformData(String csvFile) throws IOException {
-        CSVLoader csvLoader = new CSVLoader();
-        csvLoader.setSource(new File(csvFile + ".csv"));
-        Instances instances = csvLoader.getDataSet();
-
-        ArffSaver arffSaver = new ArffSaver();
-        arffSaver.setInstances(instances);
-        arffSaver.setFile(new File(filePath + csvFile + ".arff"));
-        arffSaver.writeBatch();
-    }
-
-    private Instances getData(String file) throws Exception {
-        ConverterUtils.DataSource trainingSource = new ConverterUtils.DataSource(file);
-        Instances instances = trainingSource.getDataSet();
-        instances.setClassIndex(instances.numAttributes() - 1);
-
-        return instances;
-    }
 
     private ArrayList<String> setUpAttributeNames() {
         ArrayList<String> attributeNames = new ArrayList<>(5);
@@ -57,6 +22,7 @@ public class RevisionOperator {
         attributeNames.add("Humidity");
         attributeNames.add("Wind");
         attributeNames.add("Decision");
+
         return attributeNames;
     }
 
@@ -87,7 +53,95 @@ public class RevisionOperator {
         return attributes;
     }
 
-    public void processData(ArrayList<String> beliefSetK, String phi, String omega) throws Exception {
+    public void reviseData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions) {
+        ArrayList<String> attributeNames = setUpAttributeNames();
+        ArrayList<Attribute> attributes = setUpAttributes(attributeNames);
+
+        ArrayList<Belief> beliefs = determineAllPossibleBeliefs(attributes, attributeNames);
+
+        for (String beliefK : beliefSetK) {
+            beliefs = reviseBeliefs(beliefs, beliefK, attributes);
+        }
+
+        for (Belief belief : beliefs) {
+            System.out.println(belief.toString());
+        }
+
+        System.out.println();
+        for (String revision : revisions) {
+            ArrayList<Belief> revisedBeliefs = reviseBeliefs(beliefs, revision, attributes);
+            for (Belief revisedBelief : revisedBeliefs) {
+                System.out.println(revisedBelief.toString());
+            }
+            System.out.println();
+        }
+
+        ArrayList<Belief> omegaBeliefs = reviseBeliefs(beliefs, omega, attributes);
+        for (Belief omegaBelief : omegaBeliefs) {
+            System.out.println(omegaBelief.toString());
+        }
+
+        int omegaRank = findRank(omegaBeliefs, phi, attributes);
+        System.out.println(omegaRank);
+    }
+
+    private int findRank(ArrayList<Belief> omegaBeliefs, String phi, ArrayList<Attribute> attributes){
+        String[] splitPhi = phi.split(" && ");
+        for (Belief omegaBelief : omegaBeliefs) {
+            boolean matches = true;
+            for (int i = 0; i < splitPhi.length; i++) {
+                if (splitPhi[i].charAt(0) == '!') {
+                    matches = matches && omegaBelief.getSolution().get(splitPhi[i].substring(1)).equals(attributes.get(i).value(0));
+                } else {
+                    matches = matches && omegaBelief.getSolution().get(splitPhi[i]).equals(attributes.get(i).value(1));
+                }
+            }
+            if(matches){
+                return omegaBelief.getRank();
+            }
+        }
+        return -1;
+    }
+
+    private ArrayList<Belief> reviseBeliefs(ArrayList<Belief> beliefs, String newBelief, ArrayList<Attribute> attributes) {
+        String[] newBeliefSplit = newBelief.split(" && ");
+        ArrayList<Belief> revisedBeliefs = new ArrayList<>();
+        for (Belief belief : beliefs) {
+            Belief revisedBelief = new Belief();
+            revisedBelief.setSolution(belief.getSolution());
+            revisedBelief.setRank(belief.getRank());
+            for (int i = 0; i < newBeliefSplit.length; i++) {
+                if (newBeliefSplit[i].charAt(0) == '!') {
+                    if (belief.getSolution().get(newBeliefSplit[i].substring(1)).equals(attributes.get(i).value(0))) {
+                        revisedBelief.increaseRank();
+                    }
+                } else {
+                    if (belief.getSolution().get(newBeliefSplit[i]).equals(attributes.get(i).value(1))) {
+                        revisedBelief.increaseRank();
+                    }
+                }
+            }
+            revisedBeliefs.add(revisedBelief);
+        }
+        return revisedBeliefs;
+    }
+
+    private ArrayList<Belief> determineAllPossibleBeliefs(ArrayList<Attribute> attributes, ArrayList<String> attributeNames) {
+        ArrayList<Belief> beliefs = new ArrayList<>();
+
+        int numRows = (int) Math.pow(2, attributes.size());
+        for (int i = 0; i < numRows; i++) {
+            Belief belief = new Belief();
+            for (int j = 0; j < attributes.size(); j++) {
+                int value = (i / (int) Math.pow(2, j)) % 2;
+                belief.put(attributeNames.get(j), attributes.get(j).value(value));
+            }
+            beliefs.add(belief);
+        }
+        return beliefs;
+    }
+
+    public void processData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions) throws Exception {
         ArrayList<String> attributeNames = setUpAttributeNames();
         ArrayList<Attribute> attributes = setUpAttributes(attributeNames);
 
@@ -115,10 +169,9 @@ public class RevisionOperator {
         Instances classificationInstances = new Instances("classification", classificationAttributes, 0);
         classificationInstances.setClassIndex(classificationInstances.numAttributes() - 1);
 
-        reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, "Outlook && !Temp. && !Humidity && !Wind && Decision");
-        reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, "!Outlook && Temp. && !Humidity && !Wind && Decision");
-        reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, "!Outlook && !Temp. && Humidity && !Wind && Decision");
-        reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, "!Outlook && !Temp. && !Humidity && Wind && Decision");
+        for (String revision : revisions) {
+            reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, revision);
+        }
 
         Id3 classifier = new Id3();
         classifier.buildClassifier(classificationInstances);
@@ -159,19 +212,12 @@ public class RevisionOperator {
         } else {
             revision = revision + " && !Believes";
         }
+
         addInstanceGeneric(revision, classificationInstances, classificationAttributeNames);
 
         instanceK.remove(instanceK.size() - 1);
+
         return evaluation.pctCorrect();
-    }
-
-    private ArrayList<String> getAttributeNames(ArrayList<Attribute> attributes) {
-        ArrayList<String> attributeNames = new ArrayList<>();
-        for (Attribute attribute : attributes) {
-            attributeNames.add(attribute.name());
-        }
-
-        return attributeNames;
     }
 
     private ArrayList<Belief> determineSolutions(String tree, Instances instances, ArrayList<Attribute> attributes, ArrayList<String> attributeNames) {
@@ -375,17 +421,5 @@ public class RevisionOperator {
         newInstance[newInstance.length - 1] = Double.parseDouble(splitLine[1]);
 
         instances.add(new DenseInstance(1.0, newInstance));
-    }
-
-    public void reviseData() {
-
-    }
-
-    public void orderStates() {
-
-    }
-
-    public void revisionOperator() {
-
     }
 }

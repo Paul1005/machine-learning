@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 public class Belief {
     private HashMap<String, String> solution;
-    private int rank = 0;
+    private int rank;
 
     public Belief(){
         solution = new HashMap<>();
+        rank = 0;
     }
 
     public HashMap<String, String> getSolution() {
@@ -36,6 +37,10 @@ public class Belief {
 
     public void decreaseRank(){
         rank--;
+    }
+
+    public void setRank(int rank){
+        this.rank = rank;
     }
 
     @Override
