@@ -7,12 +7,6 @@ import weka.core.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/*
-NOTE: we want to find a new state whose distance is as small as possible from one of our existing solutions. The
-existing solutions may have different possible values for certain states, we take the minimum distance.
-Also the case where we have to discard one of our old beliefs, not sure what to do about that yet.
-Add new belief, if logically consistent, keep old ones, if not discard something?
- */
 public class RevisionOperator {
 
     private ArrayList<String> setUpAttributeNames() {
@@ -150,7 +144,7 @@ public class RevisionOperator {
         for (String k : beliefSetK) {
             addInstanceGeneric(k, kInstances, attributeNames);
         }
-        System.out.println(kInstances + "\n");
+        System.out.println("Initial set K: \n" + kInstances + "\n");
 
         Instances phiInstance = new Instances("tennis-testing", attributes, 0);
         phiInstance.setClassIndex(phiInstance.numAttributes() - 1);
@@ -170,12 +164,13 @@ public class RevisionOperator {
         classificationInstances.setClassIndex(classificationInstances.numAttributes() - 1);
 
         for (String revision : revisions) {
+            System.out.println("Instances after revision by: " + revision);
             reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, revision);
         }
 
         Id3 classifier = new Id3();
         classifier.buildClassifier(classificationInstances);
-        System.out.println(classificationInstances + "\n");
+        System.out.println("Classification Instances: \n" + classificationInstances);
         System.out.println(classifier + "\n");
 
         Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0);
@@ -185,15 +180,24 @@ public class RevisionOperator {
         Evaluation classificationEvaluation = new Evaluation(classificationInstances);
         classificationEvaluation.evaluateModel(classifier, classifierTester);
 
-        double isPhiBelieved = reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, omega);
-        if (isPhiBelieved == classificationEvaluation.pctCorrect()) {
-            if (classificationEvaluation.pctCorrect() == 100) {
-                System.out.println("revising belief set K by omega will cause us to believe phi");
-            } else {
-                System.out.println("revising belief set K by omega will not cause us to believe phi");
-            }
+        if(classificationEvaluation.pctCorrect() == 100){
+            System.out.println("The ID3 tree produced by our classification thinks we will believe phi after revising by omega" + "\n");
         } else {
-            System.out.println("Our prediction was wrong");
+            System.out.println("The ID3 tree produced by our classification set does not think we will believe phi after revising by omega" + "\n");
+        }
+
+        System.out.println("Instances after revising by omega");
+        double isPhiBelieved = reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, omega);
+        if(isPhiBelieved == 100){
+            System.out.println("The ID3 tree produced by the initial set K after being revised by omega correctly predicts phi" + "\n");
+        } else {
+            System.out.println("The ID3 tree produced by the initial set K after being revised by omega does not predict phi" + "\n");
+        }
+
+        if (isPhiBelieved != classificationEvaluation.pctCorrect()) {
+            System.out.println("Our classification tree does not match our instance tree");
+        } else {
+            System.out.println("Our classification tree matches our instance tree");
         }
     }
 
