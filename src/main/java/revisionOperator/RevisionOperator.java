@@ -9,48 +9,70 @@ import java.util.HashMap;
 
 public class RevisionOperator {
 
-    private ArrayList<String> setUpAttributeNames() {
-        ArrayList<String> attributeNames = new ArrayList<>(5);
-        attributeNames.add("Outlook");
-        attributeNames.add("Temp.");
-        attributeNames.add("Humidity");
-        attributeNames.add("Wind");
-        attributeNames.add("Decision");
+    public void processData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions, ArrayList<String> attributeNames, ArrayList<Attribute> attributes) throws Exception {
+        Instances kInstances = new Instances("tennis-training", attributes, 0);
+        kInstances.setClassIndex(kInstances.numAttributes() - 1);
+        for (String k : beliefSetK) {
+            addInstanceGeneric(k, kInstances, attributeNames);
+        }
+        System.out.println("Initial set K: \n" + kInstances + "\n");
 
-        return attributeNames;
+        Instances phiInstance = new Instances("tennis-testing", attributes, 0);
+        phiInstance.setClassIndex(phiInstance.numAttributes() - 1);
+        addInstanceGeneric(phi, phiInstance, attributeNames);
+
+        ArrayList<String> belief = new ArrayList<>();
+        belief.add("False");
+        belief.add("True");
+
+        ArrayList<String> classificationAttributeNames = new ArrayList<>(attributeNames);
+        classificationAttributeNames.add("Believes");
+
+        ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes);
+        classificationAttributes.add(new Attribute(classificationAttributeNames.get(5), belief));
+
+        Instances classificationInstances = new Instances("classification", classificationAttributes, 0);
+        classificationInstances.setClassIndex(classificationInstances.numAttributes() - 1);
+
+        for (String revision : revisions) {
+            System.out.println("Instances after revision by: " + revision);
+            reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, revision);
+        }
+
+        Id3 classifier = new Id3();
+        classifier.buildClassifier(classificationInstances);
+        System.out.println("Classification Instances: \n" + classificationInstances);
+        System.out.println(classifier + "\n");
+
+        Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0);
+        classifierTester.setClassIndex(classifierTester.numAttributes() - 1);
+        addInstanceGeneric(omega + " && Believes", classifierTester, classificationAttributeNames);
+
+        Evaluation classificationEvaluation = new Evaluation(classificationInstances);
+        classificationEvaluation.evaluateModel(classifier, classifierTester);
+
+        if(classificationEvaluation.pctCorrect() == 100){
+            System.out.println("The ID3 tree produced by our classification thinks we will believe phi after revising by omega" + "\n");
+        } else {
+            System.out.println("The ID3 tree produced by our classification set does not think we will believe phi after revising by omega" + "\n");
+        }
+
+        System.out.println("Instances after revising by omega");
+        double isPhiBelieved = reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, omega);
+        if(isPhiBelieved == 100){
+            System.out.println("The ID3 tree produced by the initial set K after being revised by omega correctly predicts phi" + "\n");
+        } else {
+            System.out.println("The ID3 tree produced by the initial set K after being revised by omega does not predict phi" + "\n");
+        }
+
+        if (isPhiBelieved != classificationEvaluation.pctCorrect()) {
+            System.out.println("Our classification tree does not match our instance tree");
+        } else {
+            System.out.println("Our classification tree matches our instance tree");
+        }
     }
 
-    private ArrayList<Attribute> setUpAttributes(ArrayList<String> attributeNames) {
-        ArrayList<Attribute> attributes = new ArrayList<>(5);
-        ArrayList<String> outlook = new ArrayList<>();
-        outlook.add("Overcast");
-        outlook.add("Sunny");
-        ArrayList<String> temp = new ArrayList<>();
-        temp.add("Cool");
-        temp.add("Hot");
-        ArrayList<String> humidity = new ArrayList<>();
-        humidity.add("Normal");
-        humidity.add("High");
-        ArrayList<String> wind = new ArrayList<>();
-        wind.add("Weak");
-        wind.add("Strong");
-        ArrayList<String> decision = new ArrayList<>();
-        decision.add("No");
-        decision.add("Yes");
-
-        attributes.add(new Attribute(attributeNames.get(0), outlook));
-        attributes.add(new Attribute(attributeNames.get(1), temp));
-        attributes.add(new Attribute(attributeNames.get(2), humidity));
-        attributes.add(new Attribute(attributeNames.get(3), wind));
-        attributes.add(new Attribute(attributeNames.get(4), decision));
-
-        return attributes;
-    }
-
-    public void reviseData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions) {
-        ArrayList<String> attributeNames = setUpAttributeNames();
-        ArrayList<Attribute> attributes = setUpAttributes(attributeNames);
-
+    public void reviseData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions,  ArrayList<String> attributeNames, ArrayList<Attribute> attributes) {
         ArrayList<Belief> beliefs = determineAllPossibleBeliefs(attributes, attributeNames);
 
         for (String beliefK : beliefSetK) {
@@ -133,72 +155,6 @@ public class RevisionOperator {
             beliefs.add(belief);
         }
         return beliefs;
-    }
-
-    public void processData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions) throws Exception {
-        ArrayList<String> attributeNames = setUpAttributeNames();
-        ArrayList<Attribute> attributes = setUpAttributes(attributeNames);
-
-        Instances kInstances = new Instances("tennis-training", attributes, 0);
-        kInstances.setClassIndex(kInstances.numAttributes() - 1);
-        for (String k : beliefSetK) {
-            addInstanceGeneric(k, kInstances, attributeNames);
-        }
-        System.out.println("Initial set K: \n" + kInstances + "\n");
-
-        Instances phiInstance = new Instances("tennis-testing", attributes, 0);
-        phiInstance.setClassIndex(phiInstance.numAttributes() - 1);
-        addInstanceGeneric(phi, phiInstance, attributeNames);
-
-        ArrayList<String> belief = new ArrayList<>();
-        belief.add("False");
-        belief.add("True");
-
-        ArrayList<String> classificationAttributeNames = new ArrayList<>(attributeNames);
-        classificationAttributeNames.add("Believes");
-
-        ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes);
-        classificationAttributes.add(new Attribute(classificationAttributeNames.get(5), belief));
-
-        Instances classificationInstances = new Instances("classification", classificationAttributes, 0);
-        classificationInstances.setClassIndex(classificationInstances.numAttributes() - 1);
-
-        for (String revision : revisions) {
-            System.out.println("Instances after revision by: " + revision);
-            reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, revision);
-        }
-
-        Id3 classifier = new Id3();
-        classifier.buildClassifier(classificationInstances);
-        System.out.println("Classification Instances: \n" + classificationInstances);
-        System.out.println(classifier + "\n");
-
-        Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0);
-        classifierTester.setClassIndex(classifierTester.numAttributes() - 1);
-        addInstanceGeneric(omega + " && Believes", classifierTester, classificationAttributeNames);
-
-        Evaluation classificationEvaluation = new Evaluation(classificationInstances);
-        classificationEvaluation.evaluateModel(classifier, classifierTester);
-
-        if(classificationEvaluation.pctCorrect() == 100){
-            System.out.println("The ID3 tree produced by our classification thinks we will believe phi after revising by omega" + "\n");
-        } else {
-            System.out.println("The ID3 tree produced by our classification set does not think we will believe phi after revising by omega" + "\n");
-        }
-
-        System.out.println("Instances after revising by omega");
-        double isPhiBelieved = reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, omega);
-        if(isPhiBelieved == 100){
-            System.out.println("The ID3 tree produced by the initial set K after being revised by omega correctly predicts phi" + "\n");
-        } else {
-            System.out.println("The ID3 tree produced by the initial set K after being revised by omega does not predict phi" + "\n");
-        }
-
-        if (isPhiBelieved != classificationEvaluation.pctCorrect()) {
-            System.out.println("Our classification tree does not match our instance tree");
-        } else {
-            System.out.println("Our classification tree matches our instance tree");
-        }
     }
 
     private double reviseAndTest(ArrayList<String> attributeNames, Instances instanceK, Instances testingInstances, ArrayList<String> classificationAttributeNames, Instances classificationInstances, String revision) throws Exception {

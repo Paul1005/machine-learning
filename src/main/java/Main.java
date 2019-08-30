@@ -1,28 +1,20 @@
 import revisionOperator.RevisionOperator;
 
-import java.util.ArrayList;
+import java.io.File;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        ArrayList<String> beliefSetK = new ArrayList<>();
-        beliefSetK.add("Outlook && Temp. && Humidity && !Wind && !Decision");
-        beliefSetK.add("Outlook && Temp. && Humidity && Wind && !Decision");
-        beliefSetK.add("!Outlook && Temp. && Humidity && !Wind && Decision");
-        beliefSetK.add("!Outlook && !Temp. && !Humidity && !Wind && Decision");
-        beliefSetK.add("!Outlook && !Temp. && !Humidity && !Wind && !Decision");
-        beliefSetK.add("Outlook && !Temp. && Humidity && !Wind && !Decision");
+        File input = new File("src/main/resources/Input.txt");
 
-        String phi = "!Outlook && !Temp. && Humidity && Wind && !Decision";
-        String omega = "!Outlook && Temp. && !Humidity && !Wind && Decision";
-
-        ArrayList<String> revisions = new ArrayList<>();
-
-        revisions.add("Outlook && !Temp. && !Humidity && Wind && Decision");
-        revisions.add("!Outlook && !Temp. && Humidity && Wind && Decision");
-        revisions.add("!Outlook && !Temp. && !Humidity && Wind && !Decision");
+        TextFileDecrypter textFileDecrypter = new TextFileDecrypter(input);
 
         RevisionOperator revisionOperator = new RevisionOperator();
-        revisionOperator.processData(beliefSetK, phi, omega, revisions);
+        revisionOperator.processData(textFileDecrypter.getBeliefSetK(),
+                textFileDecrypter.getPhi(),
+                textFileDecrypter.getOmega(),
+                textFileDecrypter.getRevisions(),
+                textFileDecrypter.getAttributeNames(),
+                textFileDecrypter.getAttributes());
         //revisionOperator.reviseData(beliefSetK, phi, omega, revisions);
     }
 }
