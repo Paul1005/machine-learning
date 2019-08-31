@@ -49,7 +49,7 @@ class TextFileDecrypter {
                     }
                     i--;
                     break;
-                case "BeliefSetK:":
+                case "Belief Set K:":
                     i++;
                     while (!inputArray.get(i).equals("")) {
                         beliefSetK.add(inputArray.get(i));
@@ -77,27 +77,27 @@ class TextFileDecrypter {
         }
     }
 
-    public ArrayList<String> getAttributeNames() {
+    ArrayList<String> getAttributeNames() {
         return attributeNames;
     }
 
-    public ArrayList<Attribute> getAttributes() {
+    ArrayList<Attribute> getAttributes() {
         return attributes;
     }
 
-    public ArrayList<String> getBeliefSetK() {
+    ArrayList<String> getBeliefSetK() {
         return beliefSetK;
     }
 
-    public String getPhi() {
+    String getPhi() {
         return phi;
     }
 
-    public String getOmega() {
+    String getOmega() {
         return omega;
     }
 
-    public ArrayList<String> getRevisions() {
+    ArrayList<String> getRevisions() {
         return revisions;
     }
 }

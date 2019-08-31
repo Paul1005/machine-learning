@@ -1,9 +1,0 @@
-@relation Rel
-
-@attribute height numeric
-@attribute weight numeric
-@attribute location {australia,africa,america}
-@attribute Class {cat,elephant}
-
-@data
-0.5,10,america,cat

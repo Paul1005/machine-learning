@@ -1,7 +1,0 @@
-@relation hamspam
-
-@attribute text string
-@attribute class {spam,ham}
-
-@data
-'you won lottery',?

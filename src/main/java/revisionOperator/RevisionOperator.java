@@ -9,48 +9,52 @@ import java.util.HashMap;
 
 public class RevisionOperator {
 
+    /*
+    Primary method for the class. This takes all the various variables and determines weather revising Belief set K by Omega will cause us to believe Phi.
+     */
     public void processData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions, ArrayList<String> attributeNames, ArrayList<Attribute> attributes) throws Exception {
-        Instances kInstances = new Instances("tennis-training", attributes, 0);
-        kInstances.setClassIndex(kInstances.numAttributes() - 1);
-        for (String k : beliefSetK) {
-            addInstanceGeneric(k, kInstances, attributeNames);
+        Instances kInstances = new Instances("training", attributes, 0); // create out initial set of instances
+        kInstances.setClassIndex(kInstances.numAttributes() - 1); // set the class to the final attribute
+        for (String k : beliefSetK) { // add the instances specified in beliefSetK
+            addInstance(k, kInstances, attributeNames);
         }
-        System.out.println("Initial set K: \n" + kInstances + "\n");
+        System.out.println("Initial set K: \n" + kInstances + "\n"); // print out the initial belief set before any rivisions
 
-        Instances phiInstance = new Instances("tennis-testing", attributes, 0);
+        Instances phiInstance = new Instances("testing", attributes, 0); // create instances that will contain phi
         phiInstance.setClassIndex(phiInstance.numAttributes() - 1);
-        addInstanceGeneric(phi, phiInstance, attributeNames);
+        addInstance(phi, phiInstance, attributeNames); // add phi to the instance
 
-        ArrayList<String> belief = new ArrayList<>();
+        ArrayList<String> belief = new ArrayList<>(); // create the belief attribute for our classification instances, which can be true or false
         belief.add("False");
         belief.add("True");
 
-        ArrayList<String> classificationAttributeNames = new ArrayList<>(attributeNames);
-        classificationAttributeNames.add("Believes");
+        ArrayList<String> classificationAttributeNames = new ArrayList<>(attributeNames); // create classification attribute name list based on the original attribute names
+        classificationAttributeNames.add("Believes"); // add the final attribute name to our classification attribute names
 
-        ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes);
-        classificationAttributes.add(new Attribute(classificationAttributeNames.get(5), belief));
+        ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes); // create classification attributes based on the original attributes
+        classificationAttributes.add(new Attribute(classificationAttributeNames.get(5), belief)); // add the aforementioned belief attribute to our classification attributes
 
-        Instances classificationInstances = new Instances("classification", classificationAttributes, 0);
+        Instances classificationInstances = new Instances("classification", classificationAttributes, 0); // creates our classification instances using the classification attributes
         classificationInstances.setClassIndex(classificationInstances.numAttributes() - 1);
 
-        for (String revision : revisions) {
+        for (String revision : revisions) { // revise belief set k by each revision and test it against phi
             System.out.println("Instances after revision by: " + revision);
             reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, revision);
         }
 
-        Id3 classifier = new Id3();
-        classifier.buildClassifier(classificationInstances);
-        System.out.println("Classification Instances: \n" + classificationInstances);
-        System.out.println(classifier + "\n");
+        Id3 classifier = new Id3(); // Creates the id3 tree we will be using for classification
+        classifier.buildClassifier(classificationInstances); // build the tree using the classification instances
+        System.out.println("Classification Instances: \n" + classificationInstances); // print out our classification instances after adding revisions
+        System.out.println(classifier + "\n"); // print out the id3 tree created by our classificationInstances
 
-        Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0);
+        Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0); // create a new instance for testing our classification tree
         classifierTester.setClassIndex(classifierTester.numAttributes() - 1);
-        addInstanceGeneric(omega + " && Believes", classifierTester, classificationAttributeNames);
+        addInstance(omega + " && Believes", classifierTester, classificationAttributeNames); // Add the omega instance with belief attribute set to true
 
-        Evaluation classificationEvaluation = new Evaluation(classificationInstances);
-        classificationEvaluation.evaluateModel(classifier, classifierTester);
+        Evaluation classificationEvaluation = new Evaluation(classificationInstances); // Create Evaluation object
+        classificationEvaluation.evaluateModel(classifier, classifierTester); // See if the classifier Id3 tree correctly predicts our testing set
 
+        // print out the results of our testing
         if(classificationEvaluation.pctCorrect() == 100){
             System.out.println("The ID3 tree produced by our classification thinks we will believe phi after revising by omega" + "\n");
         } else {
@@ -58,19 +62,73 @@ public class RevisionOperator {
         }
 
         System.out.println("Instances after revising by omega");
-        double isPhiBelieved = reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, omega);
-        if(isPhiBelieved == 100){
+        double isPhiBelieved = reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, omega); // revise K by omega and see if it believes Phi
+        if(isPhiBelieved == 100){ // print the results of the test
             System.out.println("The ID3 tree produced by the initial set K after being revised by omega correctly predicts phi" + "\n");
         } else {
             System.out.println("The ID3 tree produced by the initial set K after being revised by omega does not predict phi" + "\n");
         }
 
-        if (isPhiBelieved != classificationEvaluation.pctCorrect()) {
-            System.out.println("Our classification tree does not match our instance tree");
+        if (isPhiBelieved != classificationEvaluation.pctCorrect()) { // print out whether the results of our two tests match
+            System.out.println("Our classification tree prediction does not match our instance tree prediction");
         } else {
-            System.out.println("Our classification tree matches our instance tree");
+            System.out.println("Our classification tree prediction matches our instance tree prediction");
         }
     }
+
+    /*
+    This method revises belief set K by the revision specified, tests it against instance Phi, adds the results to the classification instances, then removes the revision from K.
+     */
+    private double reviseAndTest(ArrayList<String> attributeNames, Instances instanceK, Instances testingInstances, ArrayList<String> classificationAttributeNames, Instances classificationInstances, String revision) throws Exception {
+        Id3 id3 = new Id3(); // Id3 tree to be used in testing
+        addInstance(revision, instanceK, attributeNames); // add revision to K
+        id3.buildClassifier(instanceK); // build our tree using K
+        System.out.println(instanceK + "\n"); // print K with revision
+        System.out.println(id3 + "\n"); // print the tree generated
+
+        Evaluation evaluation = new Evaluation(instanceK);
+        evaluation.evaluateModel(id3, testingInstances); // evaluate to see if K, after being revised, correctly predicts Phi
+
+        if (evaluation.pctCorrect() == 100) {
+            revision = revision + " && Believes"; // if prediction was correct add the believes attribute as positive
+        } else {
+            revision = revision + " && !Believes"; // if prediction was incorrect add the believes attribute as negative
+        }
+
+        addInstance(revision, classificationInstances, classificationAttributeNames);  // add this revision, and its result, to our classification instances
+
+        instanceK.remove(instanceK.size() - 1); // remove the revision from K
+
+        return evaluation.pctCorrect();
+    }
+
+    private void addInstance(String instance, Instances instances, ArrayList<String> attributeNames) {
+        String[] terms = instance.split(" && ");
+
+        double[] newInstance = new double[instances.numAttributes()];
+
+        for (int i = 0; i < newInstance.length; i++) {
+            for (String term : terms) {
+                if (term.charAt(0) == '!') {
+                    if (term.equals(attributeNames.get(i))) {
+                        newInstance[i] = 0;
+                        break;
+                    }
+                } else {
+                    if (term.equals(attributeNames.get(i))) {
+                        newInstance[i] = 1;
+                        break;
+                    }
+                }
+            }
+        }
+
+        instances.add(new DenseInstance(1.0, newInstance));
+    }
+
+    /*
+    All the following methods are not used in the program; they were used either for experimentation, or for a future version of this program that was not completed.
+     */
 
     public void reviseData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions,  ArrayList<String> attributeNames, ArrayList<Attribute> attributes) {
         ArrayList<Belief> beliefs = determineAllPossibleBeliefs(attributes, attributeNames);
@@ -155,29 +213,6 @@ public class RevisionOperator {
             beliefs.add(belief);
         }
         return beliefs;
-    }
-
-    private double reviseAndTest(ArrayList<String> attributeNames, Instances instanceK, Instances testingInstances, ArrayList<String> classificationAttributeNames, Instances classificationInstances, String revision) throws Exception {
-        Id3 id3 = new Id3();
-        addInstanceGeneric(revision, instanceK, attributeNames);
-        id3.buildClassifier(instanceK);
-        System.out.println(instanceK + "\n");
-        System.out.println(id3 + "\n");
-
-        Evaluation evaluation = new Evaluation(instanceK);
-        evaluation.evaluateModel(id3, testingInstances);
-
-        if (evaluation.pctCorrect() == 100) {
-            revision = revision + " && Believes";
-        } else {
-            revision = revision + " && !Believes";
-        }
-
-        addInstanceGeneric(revision, classificationInstances, classificationAttributeNames);
-
-        instanceK.remove(instanceK.size() - 1);
-
-        return evaluation.pctCorrect();
     }
 
     private ArrayList<Belief> determineSolutions(String tree, Instances instances, ArrayList<Attribute> attributes, ArrayList<String> attributeNames) {
@@ -305,81 +340,5 @@ public class RevisionOperator {
             return Double.MAX_VALUE;
         }
         return Math.log(num) / Math.log(2);
-    }
-
-    private void addInstanceGeneric(String instance, Instances instances, ArrayList<String> attributeNames) {
-        String[] terms = instance.split(" && ");
-
-        double[] newInstance = new double[instances.numAttributes()];
-
-        for (int i = 0; i < newInstance.length; i++) {
-            for (String term : terms) {
-                if (term.charAt(0) == '!') {
-                    if (term.equals(attributeNames.get(i))) {
-                        newInstance[i] = 0;
-                        break;
-                    }
-                } else {
-                    if (term.equals(attributeNames.get(i))) {
-                        newInstance[i] = 1;
-                        break;
-                    }
-                }
-            }
-        }
-
-        instances.add(new DenseInstance(1.0, newInstance));
-    }
-
-    private void addInitialSetK(String k, Instances instances, ArrayList<String> attributeNames) {
-        String[] splitLine = k.split(", ");
-        String[] terms = splitLine[0].split(" && ");
-
-        double[] newInstance = new double[instances.numAttributes()];
-
-        for (int i = 0; i < newInstance.length - 1; i++) {
-            newInstance[i] = 0;
-            for (String term : terms) {
-                if (term.equals(attributeNames.get(i))) {
-                    newInstance[i] = 1;
-                    break;
-                }
-            }
-        }
-
-        newInstance[newInstance.length - 1] = Double.parseDouble(splitLine[1]);
-
-        instances.add(new DenseInstance(1.0, newInstance));
-    }
-
-    private void addInstance(String newLine, Instances instances, ArrayList<String> attributeNames) {
-        String[] splitLine = newLine.split(", ");
-        String[] terms = splitLine[0].split(" && ");
-
-        double[] newInstance = new double[instances.numAttributes()];
-
-        double[] k = instances.get(0).toDoubleArray(); // get first entry
-
-        for (int i = 0; i < newInstance.length - 1; i++) {
-            newInstance[i] = k[i];
-            for (String term : terms) {
-                if (term.charAt(0) == '!') {
-                    term = term.substring(1);
-                    if (term.equals(attributeNames.get(i))) {
-                        newInstance[i] = 0;
-                        break;
-                    }
-                } else {
-                    if (term.equals(attributeNames.get(i))) {
-                        newInstance[i] = 1;
-                        break;
-                    }
-                }
-            }
-        }
-
-        newInstance[newInstance.length - 1] = Double.parseDouble(splitLine[1]);
-
-        instances.add(new DenseInstance(1.0, newInstance));
     }
 }
