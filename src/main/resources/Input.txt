@@ -28,6 +28,7 @@ Yes
 
 Belief Set K:
 Outlook && Temp. && Humidity && !Wind && !Decision
+!Outlook && !Temp. && Humidity && Wind && Decision
 
 Phi:
 !Outlook && !Temp. && Humidity && Wind && !Decision
@@ -37,3 +38,5 @@ Omega:
 
 Revisions:
 Outlook && !Temp. && !Humidity && Wind && Decision
+!Outlook && !Temp. && !Humidity && !Wind && !Decision
+Outlook && Temp. && !Humidity && Wind && Decision

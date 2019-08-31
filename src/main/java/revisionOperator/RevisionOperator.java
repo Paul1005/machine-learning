@@ -18,7 +18,7 @@ public class RevisionOperator {
         for (String k : beliefSetK) { // add the instances specified in beliefSetK
             addInstance(k, kInstances, attributeNames);
         }
-        System.out.println("Initial set K: \n" + kInstances + "\n"); // print out the initial belief set before any rivisions
+        System.out.println("Initial set K: \n" + kInstances + "\n"); // print out the initial belief set before any revisions
 
         Instances phiInstance = new Instances("testing", attributes, 0); // create instances that will contain phi
         phiInstance.setClassIndex(phiInstance.numAttributes() - 1);
@@ -102,19 +102,22 @@ public class RevisionOperator {
         return evaluation.pctCorrect();
     }
 
+    /*
+    Adds the specified string instance to the set of instances
+     */
     private void addInstance(String instance, Instances instances, ArrayList<String> attributeNames) {
-        String[] terms = instance.split(" && ");
+        String[] terms = instance.split(" && "); // split up the various terms by &&
 
-        double[] newInstance = new double[instances.numAttributes()];
+        double[] newInstance = new double[instances.numAttributes()]; // instance values are stored as doubles
 
         for (int i = 0; i < newInstance.length; i++) {
             for (String term : terms) {
-                if (term.charAt(0) == '!') {
+                if (term.charAt(0) == '!') { // value is negative
                     if (term.equals(attributeNames.get(i))) {
                         newInstance[i] = 0;
                         break;
                     }
-                } else {
+                } else { // value is positive
                     if (term.equals(attributeNames.get(i))) {
                         newInstance[i] = 1;
                         break;
@@ -123,18 +126,21 @@ public class RevisionOperator {
             }
         }
 
-        instances.add(new DenseInstance(1.0, newInstance));
+        instances.add(new DenseInstance(1.0, newInstance)); // add the newly created instance
     }
 
     /*
-    All the following methods are not used in the program; they were used either for experimentation, or for a future version of this program that was not completed.
+    None of the following methods are used in this program; they were used either for experimentation, or for a future version of this program that was never completed.
      */
 
-    public void reviseData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions,  ArrayList<String> attributeNames, ArrayList<Attribute> attributes) {
+    /*
+    this takes all possible beliefs for a given attribute set, then revises by by our initial belief set k, revises again by each revision, then revises by omega, and prints the rank of phi
+     */
+    public void reviseData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions, ArrayList<String> attributeNames, ArrayList<Attribute> attributes) {
         ArrayList<Belief> beliefs = determineAllPossibleBeliefs(attributes, attributeNames);
 
         for (String beliefK : beliefSetK) {
-            beliefs = reviseBeliefs(beliefs, beliefK, attributes);
+            beliefs = reviseBeliefs(beliefs, beliefK, attributes); //revise beliefs by initial belief set K
         }
 
         for (Belief belief : beliefs) {
@@ -143,40 +149,46 @@ public class RevisionOperator {
 
         System.out.println();
         for (String revision : revisions) {
-            ArrayList<Belief> revisedBeliefs = reviseBeliefs(beliefs, revision, attributes);
+            ArrayList<Belief> revisedBeliefs = reviseBeliefs(beliefs, revision, attributes); // revise beliefs again by revision instance
             for (Belief revisedBelief : revisedBeliefs) {
                 System.out.println(revisedBelief.toString());
             }
             System.out.println();
         }
 
-        ArrayList<Belief> omegaBeliefs = reviseBeliefs(beliefs, omega, attributes);
+        ArrayList<Belief> omegaBeliefs = reviseBeliefs(beliefs, omega, attributes); // revise beliefs by omega
         for (Belief omegaBelief : omegaBeliefs) {
             System.out.println(omegaBelief.toString());
         }
 
-        int omegaRank = findRank(omegaBeliefs, phi, attributes);
+        int omegaRank = findRank(omegaBeliefs, phi, attributes); // find rank of phi in instances revised by omega
         System.out.println(omegaRank);
     }
 
-    private int findRank(ArrayList<Belief> omegaBeliefs, String phi, ArrayList<Attribute> attributes){
-        String[] splitPhi = phi.split(" && ");
-        for (Belief omegaBelief : omegaBeliefs) {
+    /*
+     Finds the rank (likelihood) of a given instance in a a set of beliefs (higher rank = more likely)
+     */
+    private int findRank(ArrayList<Belief> beliefs, String instance, ArrayList<Attribute> attributes){
+        String[] splitPhi = instance.split(" && ");
+        for (Belief belief : beliefs) {
             boolean matches = true;
             for (int i = 0; i < splitPhi.length; i++) {
                 if (splitPhi[i].charAt(0) == '!') {
-                    matches = matches && omegaBelief.getSolution().get(splitPhi[i].substring(1)).equals(attributes.get(i).value(0));
+                    matches = matches && belief.getSolution().get(splitPhi[i].substring(1)).equals(attributes.get(i).value(0));
                 } else {
-                    matches = matches && omegaBelief.getSolution().get(splitPhi[i]).equals(attributes.get(i).value(1));
+                    matches = matches && belief.getSolution().get(splitPhi[i]).equals(attributes.get(i).value(1));
                 }
             }
             if(matches){
-                return omegaBelief.getRank();
+                return belief.getRank();
             }
         }
         return -1;
     }
 
+    /*
+    Increases the ranks of the beliefs based on how closely they match the new belief. Each attribute whose values match increases the rank by one.
+     */
     private ArrayList<Belief> reviseBeliefs(ArrayList<Belief> beliefs, String newBelief, ArrayList<Attribute> attributes) {
         String[] newBeliefSplit = newBelief.split(" && ");
         ArrayList<Belief> revisedBeliefs = new ArrayList<>();
@@ -200,6 +212,9 @@ public class RevisionOperator {
         return revisedBeliefs;
     }
 
+    /*
+    Finds all possible combinations of values for a given number of attributes
+     */
     private ArrayList<Belief> determineAllPossibleBeliefs(ArrayList<Attribute> attributes, ArrayList<String> attributeNames) {
         ArrayList<Belief> beliefs = new ArrayList<>();
 
@@ -215,6 +230,9 @@ public class RevisionOperator {
         return beliefs;
     }
 
+    /*
+    Determines the solutions for attributes based on the ID3 tree
+     */
     private ArrayList<Belief> determineSolutions(String tree, Instances instances, ArrayList<Attribute> attributes, ArrayList<String> attributeNames) {
         String[] lines = tree.split("\n");
         ArrayList<HashMap<String, String>> solutions = new ArrayList<>();
@@ -283,6 +301,9 @@ public class RevisionOperator {
         return beliefs;
     }
 
+    /*
+    Calculates the information gain (entropy reduction) that an attribute will give us.
+     */
     private double calculateInformationGain(double entropy, Instances instances, String attribute, ArrayList<Attribute> attributes, ArrayList<String> attributeNames) {
         double numInstances = instances.size();
         double numPositives = 0;
@@ -316,6 +337,9 @@ public class RevisionOperator {
         return entropy - numPositives / numInstances * entropyPositive - numNegatives / numInstances * entropyNegative;
     }
 
+    /*
+     Calculates the overall entropy of a set of instances
+     */
     private double calculateEntropy(Instances instances) {
         double numInstances = instances.size();
         if (numInstances == 0) {

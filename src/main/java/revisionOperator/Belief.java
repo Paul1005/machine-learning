@@ -11,27 +11,27 @@ public class Belief {
         rank = 0;
     }
 
-    public HashMap<String, String> getSolution() {
+    HashMap<String, String> getSolution() {
         return solution;
     }
 
-    public void put(String key, String value) {
+    void put(String key, String value) {
         solution.put(key, value);
     }
 
-    public void setSolution(HashMap<String, String> solution){
+    void setSolution(HashMap<String, String> solution){
         this.solution = solution;
     }
 
-    public void replace(String key, String value){
+    void replace(String key, String value){
         solution.replace(key, value);
     }
 
-    public int getRank() {
+    int getRank() {
         return rank;
     }
 
-    public void increaseRank() {
+    void increaseRank() {
         rank++;
     }
 
@@ -39,7 +39,7 @@ public class Belief {
         rank--;
     }
 
-    public void setRank(int rank){
+    void setRank(int rank){
         this.rank = rank;
     }
 

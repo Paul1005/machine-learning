@@ -3,74 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="15bb43a3-06eb-4bdb-a5f1-41952ab92d6e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/DecisionTreeDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/KNNDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/LogisticRegressionDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/NaiveBayesDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/RandomForestDemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/SMODemo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/revisionOperator/Variable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/data.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/decision-random-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/decision-random-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/decision-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/decision-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/food-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/food-test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/food-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/food-train.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/leaf.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/leaf.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/naive-confused.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/naive-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/naive-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/regression-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/svm-confused.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/svm-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/svm-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/tennis-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/tennis-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/test-confused.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/weather.nominal .test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/weather.nominal-confused.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/weather.nominal.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DecisionTreeDemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/KNNDemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/LogisticRegressionDemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/NaiveBayesDemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/RandomForestDemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SMODemo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TextFileDecrypter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TextFileDecrypter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/testProgram/TestProgram.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/revisionOperator/Variable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/testProgram/TestProgram.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/Input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Input.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/data.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/decision-random-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/decision-random-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/decision-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/decision-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/food-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/food-test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/food-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/food-train.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/leaf-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/leaf.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/leaf.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/naive-confused.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/naive-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/naive-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/regression-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/svm-confused.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/svm-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/svm-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tennis-test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tennis-train.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/tennis-train.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test-confused.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather.nominal .test.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather.nominal-confused.arff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather.nominal.arff" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -155,16 +92,16 @@
           <entry key="arff" value="202" />
           <entry key="csv" value="32" />
           <entry key="gradle" value="2" />
-          <entry key="java" value="16684" />
-          <entry key="txt" value="6" />
+          <entry key="java" value="18030" />
+          <entry key="txt" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSV" value="32" />
           <entry key="Groovy" value="2" />
-          <entry key="JAVA" value="16684" />
-          <entry key="PLAIN_TEXT" value="208" />
+          <entry key="JAVA" value="18030" />
+          <entry key="PLAIN_TEXT" value="227" />
         </counts>
       </usages-collector>
     </session>
@@ -174,8 +111,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="71" column="125" selection-start-line="71" selection-start-column="125" selection-end-line="71" selection-end-column="125" />
+            <state relative-caret-position="374">
+              <caret line="64" column="37" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -200,8 +137,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="93" selection-start-line="16" selection-start-column="93" selection-end-line="16" selection-end-column="93" />
+            <state relative-caret-position="204">
+              <caret line="12" column="35" lean-forward="true" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -212,8 +149,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/Input.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="38" column="50" lean-forward="true" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
+            <state relative-caret-position="34">
+              <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -221,20 +158,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/TextFileDecrypter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="51" column="33" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
+            <state relative-caret-position="371">
+              <caret line="68" column="34" lean-forward="true" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2717#2718#0" expanded="true" />
+                <element signature="e#2754#2755#0" expanded="true" />
+                <element signature="e#2798#2799#0" expanded="true" />
+                <element signature="e#2831#2832#0" expanded="true" />
+                <element signature="e#2872#2873#0" expanded="true" />
+                <element signature="e#2905#2906#0" expanded="true" />
+                <element signature="e#2928#2929#0" expanded="true" />
+                <element signature="e#2954#2955#0" expanded="true" />
+                <element signature="e#2979#2980#0" expanded="true" />
+                <element signature="e#3007#3008#0" expanded="true" />
+                <element signature="e#3171#3172#0" expanded="true" />
+                <element signature="e#3203#3204#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/testProgram/TestProgram.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -242,8 +182,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="340">
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
             </state>
           </provider>
         </entry>
@@ -849,11 +789,11 @@
         <option value="$PROJECT_DIR$/src/main/java/revisionOperator/Variable.java" />
         <option value="$PROJECT_DIR$/src/main/resources/tennis-test.arff" />
         <option value="$PROJECT_DIR$/src/main/java/testProgram/TestProgram.java" />
-        <option value="$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/Input.txt" />
         <option value="$PROJECT_DIR$/src/main/java/TextFileDecrypter.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java" />
         <option value="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/Input.txt" />
       </list>
     </option>
   </component>
@@ -914,14 +854,6 @@
               <item name="machine-learning" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="testProgram" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="machine-learning" type="b2602c69:ProjectViewProjectNode" />
-              <item name="machine-learning" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -940,7 +872,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567210048243" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567228024106" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -1077,13 +1009,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="277737000" />
+    <option name="totallyTimeSpent" value="284077000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16364606" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16364606" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -1091,8 +1022,8 @@
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3066089" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3066089" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1122,16 +1053,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/svm-confused.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/regression-test.arff">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/svm-confused.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/regression-test.arff" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/linear-train.arff" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/linear-test.arff" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/core/converters/ArffSaver.java">
@@ -1142,167 +1065,32 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/leaf.arff" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/RandomForestDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-71">
-          <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/decision-train.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="24" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/svm-test.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/svm-train.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/test-confused.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/weather.nominal.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/weather.nominal .test.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/weather.nominal-confused.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/decision-random-test.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/decision-random-train.arff">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/data.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/KNNDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="54" column="31" lean-forward="true" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/naive-train.arff">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/naive-test.arff">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-train.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DecisionTreeDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="77" column="58" lean-forward="true" selection-start-line="77" selection-start-column="58" selection-end-line="77" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/food-test.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/NaiveBayesDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="76" column="36" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/naive-confused.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/leaf.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-      <provider editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/leaf-test.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/food-train.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" selection-end-column="28" />
-        </state>
-      </provider>
-      <provider editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/leaf.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="6" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/food-train.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="6" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/decision-test.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/food-test.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/RandomForestDemo.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/decision-train.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/svm-test.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/svm-train.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/test-confused.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/weather.nominal.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/weather.nominal .test.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/weather.nominal-confused.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/decision-random-test.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/decision-random-train.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/data.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/KNNDemo.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/naive-train.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/naive-test.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-train.csv" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/DecisionTreeDemo.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/food-test.csv" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/NaiveBayesDemo.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/naive-confused.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/leaf.csv" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/leaf-test.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/food-train.csv" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/leaf.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/food-train.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/decision-test.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/food-test.arff" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_60/src.zip!/java/lang/Boolean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -1352,65 +1140,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/LogisticRegressionDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-train.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" selection-start-line="22" selection-end-line="22" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-test.arff">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="22" selection-start-column="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/Variable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/testProgram/TestProgram.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/TextFileDecrypter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="51" column="33" selection-start-line="51" selection-start-column="33" selection-end-line="51" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/Input.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="50" lean-forward="true" selection-start-line="38" selection-start-column="50" selection-end-line="38" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/LogisticRegressionDemo.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-train.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/tennis-test.arff" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/Variable.java" />
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1421,20 +1154,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/testProgram/TestProgram.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="63" selection-start-line="63" selection-end-line="65" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/TextFileDecrypter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="68" column="34" lean-forward="true" selection-start-line="68" selection-start-column="34" selection-end-line="68" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2717#2718#0" expanded="true" />
+            <element signature="e#2754#2755#0" expanded="true" />
+            <element signature="e#2798#2799#0" expanded="true" />
+            <element signature="e#2831#2832#0" expanded="true" />
+            <element signature="e#2872#2873#0" expanded="true" />
+            <element signature="e#2905#2906#0" expanded="true" />
+            <element signature="e#2928#2929#0" expanded="true" />
+            <element signature="e#2954#2955#0" expanded="true" />
+            <element signature="e#2979#2980#0" expanded="true" />
+            <element signature="e#3007#3008#0" expanded="true" />
+            <element signature="e#3171#3172#0" expanded="true" />
+            <element signature="e#3203#3204#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/Belief.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="93" selection-start-line="16" selection-start-column="93" selection-end-line="16" selection-end-column="93" />
+        <state relative-caret-position="204">
+          <caret line="12" column="35" lean-forward="true" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Input.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="9" column="8" lean-forward="true" selection-start-line="9" selection-start-column="8" selection-end-line="9" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="71" column="125" selection-start-line="71" selection-start-column="125" selection-end-line="71" selection-end-column="125" />
+        <state relative-caret-position="374">
+          <caret line="64" column="37" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
