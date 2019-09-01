@@ -15,6 +15,11 @@ public class Main {
                 textFileDecrypter.getRevisions(),
                 textFileDecrypter.getAttributeNames(),
                 textFileDecrypter.getAttributes()); // grab all the data and see what we get.
-        //revisionOperator.reviseData(beliefSetK, phi, omega, revisions);
+        revisionOperator.reviseData(textFileDecrypter.getBeliefSetK(),
+                textFileDecrypter.getPhi(),
+                textFileDecrypter.getOmega(),
+                textFileDecrypter.getRevisions(),
+                textFileDecrypter.getAttributeNames(),
+                textFileDecrypter.getAttributes());
     }
 }

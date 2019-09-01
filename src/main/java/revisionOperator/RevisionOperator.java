@@ -170,8 +170,36 @@ public class RevisionOperator {
             System.out.println(omegaBelief.toString());
         }
 
-        int omegaRank = findRank(omegaBeliefs, phi, attributes); // find rank of phi in instances revised by omega
-        System.out.println(omegaRank);
+        int phiRankInOmega = findRank(omegaBeliefs, phi, attributes); // find rank of phi in instances revised by omega
+        int minRank = findMinRank(omegaBeliefs, attributes);
+        int maxRank = findMaxRank(omegaBeliefs, attributes);
+        int rankRange = maxRank - minRank;
+        float averageRank = minRank + (float)rankRange/2;
+        System.out.println("Min Rank: " + minRank);
+        System.out.println("Max Rank: " + maxRank);
+        System.out.println("Rank Range: " + rankRange);
+        System.out.println("Phi Rank: " + phiRankInOmega);
+        System.out.println("Average Rank: " + averageRank);
+    }
+
+    private int findMaxRank(ArrayList<Belief> beliefs, ArrayList<Attribute> attributes) {
+        int maxRank = beliefs.get(0).getRank();
+        for (Belief belief : beliefs) {
+            if(belief.getRank() > maxRank) {
+                maxRank = belief.getRank();
+            }
+        }
+        return maxRank;
+    }
+
+    private int findMinRank(ArrayList<Belief> beliefs, ArrayList<Attribute> attributes) {
+        int minRank = beliefs.get(0).getRank();
+        for (Belief belief : beliefs) {
+            if(belief.getRank() < minRank) {
+                minRank = belief.getRank();
+            }
+        }
+        return minRank;
     }
 
     /*
