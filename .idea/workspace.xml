@@ -858,7 +858,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.machine-learning [build]">
+  <component name="RunManager" selected="Gradle.machine-learning [clean]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="machine-learning_main" />
