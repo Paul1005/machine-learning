@@ -1,0 +1,42 @@
+Attribute Names:
+Outlook
+Temp.
+Humidity
+Wind
+Decision
+
+Attributes:
+Outlook
+Overcast
+Sunny
+
+Temp.
+Cool
+Hot
+
+Humidity
+Normal
+High
+
+Wind
+Weak
+Strong
+
+Decision
+No
+Yes
+
+Belief Set K:
+Outlook && Temp. && Humidity && !Wind && !Decision
+!Outlook && !Temp. && Humidity && Wind && Decision
+
+Phi:
+!Outlook && !Temp. && Humidity && Wind && !Decision
+
+Omega:
+!Outlook && Temp. && !Humidity && !Wind && Decision
+
+Revisions:
+Outlook && !Temp. && !Humidity && Wind && Decision
+!Outlook && !Temp. && !Humidity && !Wind && !Decision
+Outlook && Temp. && !Humidity && Wind && Decision
