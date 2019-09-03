@@ -79,9 +79,9 @@ public class RevisionOperator {
 
         // Print whether or not our classification testing matches our belief set K testing
         if (isPhiBelieved != classificationEvaluation.pctCorrect()) {
-            System.out.println("Our classification tree prediction does not match our instance tree prediction");
+            System.out.println("Our classification tree prediction does not match our instance tree prediction\n");
         } else {
-            System.out.println("Our classification tree prediction matches our instance tree prediction");
+            System.out.println("Our classification tree prediction matches our instance tree prediction\n");
         }
     }
 
