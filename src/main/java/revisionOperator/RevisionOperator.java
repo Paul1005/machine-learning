@@ -14,67 +14,67 @@ public class RevisionOperator {
      */
     public void processData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions, ArrayList<String> attributeNames, ArrayList<Attribute> attributes) throws Exception {
         // Set up K
-        Instances kInstances = new Instances("training", attributes, 0); // create out initial set of instances
-        kInstances.setClassIndex(kInstances.numAttributes() - 1); // set the final attribute as classification
+        Instances beliefSetKInstances = new Instances("belief-set-K", attributes, 0); // create out initial set of instances
+        beliefSetKInstances.setClassIndex(beliefSetKInstances.numAttributes() - 1); // set the final attribute as classification
         for (String k : beliefSetK) { // add the instances specified in beliefSetK
-            addInstance(k, kInstances, attributeNames);
+            addInstance(k, beliefSetKInstances, attributeNames);
         }
-        System.out.println("Initial set K: \n" + kInstances + "\n"); // print out the initial belief set before any revisions
+        System.out.println("Initial set K:\n" + beliefSetKInstances + "\n"); // print out the initial belief set before any revisions
 
         // Set up Phi
-        Instances phiInstance = new Instances("testing", attributes, 0); // create instance that will contain phi, we will use this for testing
+        Instances phiInstance = new Instances("phi", attributes, 0); // create instance that will contain phi, we will use this for testing
         phiInstance.setClassIndex(phiInstance.numAttributes() - 1);
         addInstance(phi, phiInstance, attributeNames); // add phi to the instance
 
         // Set up classification instance
-        ArrayList<String> belief = new ArrayList<>(); // create the belief attribute for our classification instances, which can be true or false
+        ArrayList<String> belief = new ArrayList<>(); // create the belief attribute for our classification instances, which refers to whether we believe Phi, it can be true or false
         belief.add("False");
         belief.add("True");
 
         ArrayList<String> classificationAttributeNames = new ArrayList<>(attributeNames); // create classification attribute name list based on the original attribute names
-        classificationAttributeNames.add("Believes"); // add the final attribute name to our classification attribute names
+        classificationAttributeNames.add("Believes"); // add the final attribute name to our list of classification attribute names
 
-        ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes); // create classification attributes based on the original attributes
+        ArrayList<Attribute> classificationAttributes = new ArrayList<>(attributes); // creates classification attributes based on the original attributes
         classificationAttributes.add(new Attribute(classificationAttributeNames.get(5), belief)); // add the aforementioned belief attribute to our classification attributes
 
         Instances classificationInstances = new Instances("classification", classificationAttributes, 0); // creates our classification instances using the classification attributes
         classificationInstances.setClassIndex(classificationInstances.numAttributes() - 1);
 
         // Do our revisions
-        for (String revision : revisions) { // revise belief set k by each revision and test it against phi
+        for (String revision : revisions) { // revise belief set k by each revision and test it against Phi
             System.out.println("Instances after revision by: " + revision);
-            reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, revision);
+            reviseAndTest(attributeNames, beliefSetKInstances, phiInstance, classificationAttributeNames, classificationInstances, revision);
         }
 
         // Id3 tree for classification
         Id3 classifier = new Id3(); // Creates the id3 tree we will be using for classification
         classifier.buildClassifier(classificationInstances); // build the tree using the classification instances
-        System.out.println("Classification Instances: \n" + classificationInstances); // print out our classification instances after adding revisions
-        System.out.println(classifier + "\n"); // print out the id3 tree created by our classificationInstances
+        System.out.println("Classification Instances:\n" + classificationInstances); // print out our classification instances after adding revisions
+        System.out.println(classifier + "\n"); // print out the id3 tree created by our classification Instances
 
-        // Set up testing instance for classification
-        Instances classifierTester = new Instances("classifier-testing", classificationAttributes, 0); // create a new instance for testing our classification tree
-        classifierTester.setClassIndex(classifierTester.numAttributes() - 1);
-        addInstance(omega + " && Believes", classifierTester, classificationAttributeNames); // Add an instance that says we will believe omega
+        // Set up the testing instance for classification
+        Instances classificationTestingInstance = new Instances("classifier-testing", classificationAttributes, 0); // create a new instance for testing our classification tree
+        classificationTestingInstance.setClassIndex(classificationTestingInstance.numAttributes() - 1);
+        addInstance(omega + " && Believes", classificationTestingInstance, classificationAttributeNames); // add an instance that says we will believe omega
 
         // Evaluate the classification instance
         Evaluation classificationEvaluation = new Evaluation(classificationInstances); // Create Evaluation object
-        classificationEvaluation.evaluateModel(classifier, classifierTester); // See if the classifier Id3 tree correctly predicts our testing set
+        classificationEvaluation.evaluateModel(classifier, classificationTestingInstance); // See if the classifier Id3 tree correctly predicts our testing set
 
         // Print out the results of our classification testing
-        if(classificationEvaluation.pctCorrect() == 100){
-            System.out.println("The ID3 tree produced by our classification thinks we will believe phi after revising by omega" + "\n");
+        if (classificationEvaluation.pctCorrect() == 100) {
+            System.out.println("The ID3 tree produced by our classification thinks we will believe phi after revising by omega\n");
         } else {
-            System.out.println("The ID3 tree produced by our classification set does not think we will believe phi after revising by omega" + "\n");
+            System.out.println("The ID3 tree produced by our classification set does not think we will believe phi after revising by omega\n");
         }
 
         // Print out the results of testing K
         System.out.println("Instances after revising by omega");
-        double isPhiBelieved = reviseAndTest(attributeNames, kInstances, phiInstance, classificationAttributeNames, classificationInstances, omega); // revise K by omega and see if it believes Phi
-        if(isPhiBelieved == 100){
-            System.out.println("The ID3 tree produced by the initial set K after being revised by omega correctly predicts phi" + "\n");
+        double isPhiBelieved = reviseAndTest(attributeNames, beliefSetKInstances, phiInstance, classificationAttributeNames, classificationInstances, omega); // revise K by omega and see if it believes Phi
+        if (isPhiBelieved == 100) {
+            System.out.println("The ID3 tree produced by the initial set K after being revised by omega correctly predicts phi\n");
         } else {
-            System.out.println("The ID3 tree produced by the initial set K after being revised by omega does not predict phi" + "\n");
+            System.out.println("The ID3 tree produced by the initial set K after being revised by omega does not predict phi\n");
         }
 
         // Print whether or not our classification testing matches our belief set K testing
@@ -100,11 +100,13 @@ public class RevisionOperator {
 
         if (evaluation.pctCorrect() == 100) {
             revision = revision + " && Believes"; // if prediction was correct add the believes attribute as positive
+            System.out.println("This revision causes us to believe Phi\n");
         } else {
             revision = revision + " && !Believes"; // if prediction was incorrect add the believes attribute as negative
+            System.out.println("This revision does not causes us to believe Phi\n");
         }
 
-        addInstance(revision, classificationInstances, classificationAttributeNames);  // add this revision, and its result, to our classification instances
+        addInstance(revision, classificationInstances, classificationAttributeNames);  // add this revision and its result, to our classification instances
 
         instanceK.remove(instanceK.size() - 1); // remove the revision from K
 
@@ -143,7 +145,7 @@ public class RevisionOperator {
      */
 
     /*
-    this takes all possible beliefs for a given attribute set, then revises by by our initial belief set k, revises again by each revision, then revises by omega, and prints the rank of phi
+    This takes all possible beliefs for a given attribute set, then revises by our initial belief set k, revises again by each revision, then revises by omega, and prints the rank of phi
      */
     public void reviseData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions, ArrayList<String> attributeNames, ArrayList<Attribute> attributes) {
         ArrayList<Belief> beliefs = determineAllPossibleBeliefs(attributes, attributeNames);
@@ -174,28 +176,63 @@ public class RevisionOperator {
         int minRank = findMinRank(omegaBeliefs, attributes);
         int maxRank = findMaxRank(omegaBeliefs, attributes);
         int rankRange = maxRank - minRank;
-        float averageRank = minRank + (float)rankRange/2;
+        float averageRank = minRank + (float) rankRange / 2;
+        int numOfBeliefs = beliefs.size();
+        int totalRank = findTotalRank(omegaBeliefs, attributes);
+        float averageRankWeighted = (float)totalRank/(float)numOfBeliefs;
         System.out.println("Min Rank: " + minRank);
         System.out.println("Max Rank: " + maxRank);
         System.out.println("Rank Range: " + rankRange);
         System.out.println("Phi Rank: " + phiRankInOmega);
         System.out.println("Average Rank: " + averageRank);
+        System.out.println("Number of beliefs: " + numOfBeliefs);
+        System.out.println("Total Rank: " + totalRank);
+        System.out.println("Weighted Average Rank: " + averageRankWeighted);
+
+        /*if(phiRankInOmega > averageRank){
+            System.out.println("System will believe Phi after revising by omega");
+        } else {
+            System.out.println("System will not believe Phi after revising by omega");
+        }*/
+
+        if(phiRankInOmega > averageRankWeighted){
+            System.out.println("System will believe Phi after revising by omega");
+        } else {
+            System.out.println("System will not believe Phi after revising by omega");
+        }
     }
 
+    /*
+    Adds together all the ranks in the system
+     */
+    private int findTotalRank(ArrayList<Belief> beliefs, ArrayList<Attribute> attributes) {
+        int totalRank = 0;
+        for (Belief belief : beliefs) {
+            totalRank = totalRank + belief.getRank();
+        }
+        return totalRank;
+    }
+
+    /*
+    Find the minimum rank in a set of beliefs
+     */
     private int findMaxRank(ArrayList<Belief> beliefs, ArrayList<Attribute> attributes) {
         int maxRank = beliefs.get(0).getRank();
         for (Belief belief : beliefs) {
-            if(belief.getRank() > maxRank) {
+            if (belief.getRank() > maxRank) {
                 maxRank = belief.getRank();
             }
         }
         return maxRank;
     }
 
+    /*
+    Find the Maximum rank in a set of beliefs
+    */
     private int findMinRank(ArrayList<Belief> beliefs, ArrayList<Attribute> attributes) {
         int minRank = beliefs.get(0).getRank();
         for (Belief belief : beliefs) {
-            if(belief.getRank() < minRank) {
+            if (belief.getRank() < minRank) {
                 minRank = belief.getRank();
             }
         }
@@ -205,7 +242,7 @@ public class RevisionOperator {
     /*
      Finds the rank (likelihood) of a given instance in a a set of beliefs (higher rank = more likely)
      */
-    private int findRank(ArrayList<Belief> beliefs, String instance, ArrayList<Attribute> attributes){
+    private int findRank(ArrayList<Belief> beliefs, String instance, ArrayList<Attribute> attributes) {
         String[] splitPhi = instance.split(" && ");
         for (Belief belief : beliefs) {
             boolean matches = true;
@@ -216,7 +253,7 @@ public class RevisionOperator {
                     matches = matches && belief.getSolution().get(splitPhi[i]).equals(attributes.get(i).value(1));
                 }
             }
-            if(matches){
+            if (matches) {
                 return belief.getRank();
             }
         }

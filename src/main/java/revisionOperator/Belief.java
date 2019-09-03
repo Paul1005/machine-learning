@@ -2,6 +2,9 @@ package revisionOperator;
 
 import java.util.HashMap;
 
+/*
+This class is only utilized in unused methods, it is design to store likelihood that a solution is true (rank is used to measure this, higher=more likely)
+ */
 public class Belief {
     private HashMap<String, String> solution;
     private int rank;
