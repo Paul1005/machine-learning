@@ -7,11 +7,13 @@ Decision
 
 Attributes:
 Outlook
+Rain
 Overcast
 Sunny
 
 Temp.
 Cool
+Mild
 Hot
 
 Humidity
@@ -27,16 +29,24 @@ No
 Yes
 
 Belief Set K:
-Outlook && Temp. && Humidity && !Wind && !Decision
-!Outlook && !Temp. && Humidity && Wind && Decision
+Sunny && Hot && High && Weak && No
+Sunny && Hot && High && Strong && No
+Overcast && Hot && High && Weak && Yes
+Rain && Mild && High && Weak && Yes
 
 Phi:
-!Outlook && !Temp. && Humidity && Wind && !Decision
+Sunny && Mild && High && Strong && No
 
 Omega:
-!Outlook && Temp. && !Humidity && !Wind && Decision
+Rain && Mild && High && Strong && No
 
 Revisions:
-Outlook && !Temp. && !Humidity && Wind && Decision
-!Outlook && !Temp. && !Humidity && !Wind && !Decision
-Outlook && Temp. && !Humidity && Wind && Decision
+Rain && Cool && Normal && Weak && Yes
+Rain && Cool && Normal && Strong && No
+Overcast && Cool && Normal && Strong && Yes
+Sunny && Mild && High && Weak && No
+Sunny && Cool && Normal && Weak && Yes
+Rain && Mild && Normal && Weak && Yes
+Sunny && Mild && Normal && Strong && Yes
+Overcast && Mild && High && Strong && Yes
+Overcast && Hot && Normal && Weak && Yes

@@ -17,14 +17,14 @@ public class RevisionOperator {
         Instances beliefSetKInstances = new Instances("belief-set-K", attributes, 0); // create out initial set of instances
         beliefSetKInstances.setClassIndex(beliefSetKInstances.numAttributes() - 1); // set the final attribute as classification
         for (String k : beliefSetK) { // add the instances specified in beliefSetK
-            addInstance(k, beliefSetKInstances, attributeNames);
+            addInstance(k, beliefSetKInstances, attributes);
         }
         System.out.println("Initial set K:\n" + beliefSetKInstances + "\n"); // print out the initial belief set before any revisions
 
         // Set up Phi
         Instances phiInstance = new Instances("phi", attributes, 0); // create instance that will contain phi, we will use this for testing
         phiInstance.setClassIndex(phiInstance.numAttributes() - 1);
-        addInstance(phi, phiInstance, attributeNames); // add phi to the instance
+        addInstance(phi, phiInstance, attributes); // add phi to the instance
 
         // Set up classification instance
         ArrayList<String> belief = new ArrayList<>(); // create the belief attribute for our classification instances, which refers to whether we believe Phi, it can be true or false
@@ -43,7 +43,7 @@ public class RevisionOperator {
         // Do our revisions
         for (String revision : revisions) { // revise belief set k by each revision and test it against Phi
             System.out.println("Instances after revision by: " + revision);
-            reviseAndTest(attributeNames, beliefSetKInstances, phiInstance, classificationAttributeNames, classificationInstances, revision);
+            reviseAndTest(attributes, beliefSetKInstances, phiInstance, classificationAttributes, classificationInstances, revision);
         }
 
         // Id3 tree for classification
@@ -55,7 +55,7 @@ public class RevisionOperator {
         // Set up the testing instance for classification
         Instances classificationTestingInstance = new Instances("classifier-testing", classificationAttributes, 0); // create a new instance for testing our classification tree
         classificationTestingInstance.setClassIndex(classificationTestingInstance.numAttributes() - 1);
-        addInstance(omega + " && Believes", classificationTestingInstance, classificationAttributeNames); // add an instance that says we will believe omega
+        addInstance(omega + " && True", classificationTestingInstance, classificationAttributes); // add an instance that says we will believe omega
 
         // Evaluate the classification instance
         Evaluation classificationEvaluation = new Evaluation(classificationInstances); // Create Evaluation object
@@ -70,7 +70,7 @@ public class RevisionOperator {
 
         // Print out the results of testing K
         System.out.println("Instances after revising by omega");
-        double isPhiBelieved = reviseAndTest(attributeNames, beliefSetKInstances, phiInstance, classificationAttributeNames, classificationInstances, omega); // revise K by omega and see if it believes Phi
+        double isPhiBelieved = reviseAndTest(attributes, beliefSetKInstances, phiInstance, classificationAttributes, classificationInstances, omega); // revise K by omega and see if it believes Phi
         if (isPhiBelieved == 100) {
             System.out.println("The ID3 tree produced by the initial set K after being revised by omega correctly predicts phi\n");
         } else {
@@ -88,9 +88,9 @@ public class RevisionOperator {
     /*
     This method revises belief set K by the revision specified, tests it against instance Phi, adds the results to the classification instances, then removes the revision from K.
      */
-    private double reviseAndTest(ArrayList<String> attributeNames, Instances instanceK, Instances testingInstances, ArrayList<String> classificationAttributeNames, Instances classificationInstances, String revision) throws Exception {
+    private double reviseAndTest(ArrayList<Attribute> attributes, Instances instanceK, Instances testingInstances, ArrayList<Attribute> classificationAttributes, Instances classificationInstances, String revision) throws Exception {
         Id3 id3 = new Id3(); // Id3 tree to be used in testing
-        addInstance(revision, instanceK, attributeNames); // add revision to K
+        addInstance(revision, instanceK, attributes); // add revision to K
         id3.buildClassifier(instanceK); // build our tree using K
         System.out.println(instanceK + "\n"); // print K with revision
         System.out.println(id3 + "\n"); // print the tree generated
@@ -99,14 +99,14 @@ public class RevisionOperator {
         evaluation.evaluateModel(id3, testingInstances); // evaluate to see if K, after being revised, correctly predicts Phi
 
         if (evaluation.pctCorrect() == 100) {
-            revision = revision + " && Believes"; // if prediction was correct add the believes attribute as positive
+            revision = revision + " && True"; // if prediction was correct add the believes attribute as positive
             System.out.println("This revision causes us to believe Phi\n");
         } else {
-            revision = revision + " && !Believes"; // if prediction was incorrect add the believes attribute as negative
+            revision = revision + " && False"; // if prediction was incorrect add the believes attribute as negative
             System.out.println("This revision does not causes us to believe Phi\n");
         }
 
-        addInstance(revision, classificationInstances, classificationAttributeNames);  // add this revision and its result, to our classification instances
+        addInstance(revision, classificationInstances, classificationAttributes);  // add this revision and its result, to our classification instances
 
         instanceK.remove(instanceK.size() - 1); // remove the revision from K
 
@@ -116,23 +116,15 @@ public class RevisionOperator {
     /*
     Adds the specified string instance to the set of instances
      */
-    private void addInstance(String instance, Instances instances, ArrayList<String> attributeNames) {
+    private void addInstance(String instance, Instances instances, ArrayList<Attribute> attributes) {
         String[] terms = instance.split(" && "); // split up the various terms by &&
 
         double[] newInstance = new double[instances.numAttributes()]; // instance values are stored as doubles
 
         for (int i = 0; i < newInstance.length; i++) {
-            for (String term : terms) {
-                if (term.charAt(0) == '!') { // value is negative
-                    if (term.equals(attributeNames.get(i))) {
-                        newInstance[i] = 0;
-                        break;
-                    }
-                } else { // value is positive
-                    if (term.equals(attributeNames.get(i))) {
-                        newInstance[i] = 1;
-                        break;
-                    }
+            for (int j = 0; j < attributes.get(i).numValues(); j++) {
+                if (attributes.get(i).value(j).equals(terms[i])) {
+                    newInstance[i] = j;
                 }
             }
         }
@@ -179,7 +171,7 @@ public class RevisionOperator {
         float averageRank = minRank + (float) rankRange / 2;
         int numOfBeliefs = beliefs.size();
         int totalRank = findTotalRank(omegaBeliefs, attributes);
-        float averageRankWeighted = (float)totalRank/(float)numOfBeliefs;
+        float averageRankWeighted = (float) totalRank / (float) numOfBeliefs;
         System.out.println("Min Rank: " + minRank);
         System.out.println("Max Rank: " + maxRank);
         System.out.println("Rank Range: " + rankRange);
@@ -195,7 +187,7 @@ public class RevisionOperator {
             System.out.println("System will not believe Phi after revising by omega");
         }*/
 
-        if(phiRankInOmega > averageRankWeighted){
+        if (phiRankInOmega > averageRankWeighted) {
             System.out.println("System will believe Phi after revising by omega");
         } else {
             System.out.println("System will not believe Phi after revising by omega");
