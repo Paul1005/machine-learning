@@ -35,7 +35,7 @@ Overcast && Hot && High && Weak && Yes
 Rain && Mild && High && Weak && Yes
 
 Phi:
-Sunny && Mild && High && Strong && No
+Rain && Cold && High && Strong && Yes
 
 Omega:
 Rain && Mild && High && Strong && No

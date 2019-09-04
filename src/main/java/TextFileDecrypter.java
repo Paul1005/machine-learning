@@ -13,16 +13,19 @@ class TextFileDecrypter {
     private String omega = "";
     private ArrayList<String> revisions = new ArrayList<>();
 
-    TextFileDecrypter(File input) throws FileNotFoundException {
-        Scanner scanner = new Scanner(input);
+    TextFileDecrypter(File input) {
+        try {
+            Scanner scanner = new Scanner(input);
+            ArrayList<String> inputArray = new ArrayList<>();
+            while (scanner.hasNextLine()) {
+                inputArray.add(scanner.nextLine());
+            }
+            scanner.close();
 
-        ArrayList<String> inputArray = new ArrayList<>();
-        while (scanner.hasNextLine()) {
-            inputArray.add(scanner.nextLine());
+            ExtractInfo(inputArray);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        scanner.close();
-
-        ExtractInfo(inputArray);
     }
 
     private void ExtractInfo(ArrayList<String> inputArray) {

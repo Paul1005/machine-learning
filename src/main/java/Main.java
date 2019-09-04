@@ -3,7 +3,7 @@ import revisionOperator.RevisionOperator;
 import java.io.File;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         File input = new File("src/main/resources/Input.txt"); // grab the text file in the resources folder
 
         TextFileDecrypter textFileDecrypter = new TextFileDecrypter(input); // decrypt the file contents

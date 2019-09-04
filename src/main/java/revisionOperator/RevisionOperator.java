@@ -12,7 +12,7 @@ public class RevisionOperator {
     /*
     Primary method for the class. This takes all the various variables and determines weather revising Belief set K by Omega will cause us to believe Phi.
      */
-    public void processData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions, ArrayList<String> attributeNames, ArrayList<Attribute> attributes) throws Exception {
+    public void processData(ArrayList<String> beliefSetK, String phi, String omega, ArrayList<String> revisions, ArrayList<String> attributeNames, ArrayList<Attribute> attributes) {
         // Set up K
         Instances beliefSetKInstances = new Instances("belief-set-K", attributes, 0); // create out initial set of instances
         beliefSetKInstances.setClassIndex(beliefSetKInstances.numAttributes() - 1); // set the final attribute as classification
@@ -48,7 +48,11 @@ public class RevisionOperator {
 
         // Id3 tree for classification
         Id3 classifier = new Id3(); // Creates the id3 tree we will be using for classification
-        classifier.buildClassifier(classificationInstances); // build the tree using the classification instances
+        try {
+            classifier.buildClassifier(classificationInstances); // build the tree using the classification instances
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("Classification Instances:\n" + classificationInstances); // print out our classification instances after adding revisions
         System.out.println(classifier + "\n"); // print out the id3 tree created by our classification Instances
 
@@ -58,59 +62,66 @@ public class RevisionOperator {
         addInstance(omega + " && True", classificationTestingInstance, classificationAttributes); // add an instance that says we will believe omega
 
         // Evaluate the classification instance
-        Evaluation classificationEvaluation = new Evaluation(classificationInstances); // Create Evaluation object
-        classificationEvaluation.evaluateModel(classifier, classificationTestingInstance); // See if the classifier Id3 tree correctly predicts our testing set
+        try {
+            Evaluation classificationEvaluation = new Evaluation(classificationInstances); // Create Evaluation object
+            classificationEvaluation.evaluateModel(classifier, classificationTestingInstance); // See if the classifier Id3 tree correctly predicts our testing set
+            // Print out the results of our classification testing
+            if (classificationEvaluation.pctCorrect() == 100) {
+                System.out.println("The ID3 tree produced by our classification thinks we will believe phi after revising by omega\n");
+            } else {
+                System.out.println("The ID3 tree produced by our classification set does not think we will believe phi after revising by omega\n");
+            }
+            // Print out the results of testing K
+            System.out.println("Instances after revising by omega");
+            double isPhiBelieved = reviseAndTest(attributes, beliefSetKInstances, phiInstance, classificationAttributes, classificationInstances, omega); // revise K by omega and see if it believes Phi
+            if (isPhiBelieved == 100) {
+                System.out.println("The ID3 tree produced by the initial set K after being revised by omega correctly predicts phi\n");
+            } else {
+                System.out.println("The ID3 tree produced by the initial set K after being revised by omega does not predict phi\n");
+            }
 
-        // Print out the results of our classification testing
-        if (classificationEvaluation.pctCorrect() == 100) {
-            System.out.println("The ID3 tree produced by our classification thinks we will believe phi after revising by omega\n");
-        } else {
-            System.out.println("The ID3 tree produced by our classification set does not think we will believe phi after revising by omega\n");
-        }
-
-        // Print out the results of testing K
-        System.out.println("Instances after revising by omega");
-        double isPhiBelieved = reviseAndTest(attributes, beliefSetKInstances, phiInstance, classificationAttributes, classificationInstances, omega); // revise K by omega and see if it believes Phi
-        if (isPhiBelieved == 100) {
-            System.out.println("The ID3 tree produced by the initial set K after being revised by omega correctly predicts phi\n");
-        } else {
-            System.out.println("The ID3 tree produced by the initial set K after being revised by omega does not predict phi\n");
-        }
-
-        // Print whether or not our classification testing matches our belief set K testing
-        if (isPhiBelieved != classificationEvaluation.pctCorrect()) {
-            System.out.println("Our classification tree prediction does not match our instance tree prediction\n");
-        } else {
-            System.out.println("Our classification tree prediction matches our instance tree prediction\n");
+            // Print whether or not our classification testing matches our belief set K testing
+            if (isPhiBelieved != classificationEvaluation.pctCorrect()) {
+                System.out.println("Our classification tree prediction does not match our instance tree prediction\n");
+            } else {
+                System.out.println("Our classification tree prediction matches our instance tree prediction\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     /*
     This method revises belief set K by the revision specified, tests it against instance Phi, adds the results to the classification instances, then removes the revision from K.
      */
-    private double reviseAndTest(ArrayList<Attribute> attributes, Instances instanceK, Instances testingInstances, ArrayList<Attribute> classificationAttributes, Instances classificationInstances, String revision) throws Exception {
+    private double reviseAndTest(ArrayList<Attribute> attributes, Instances instanceK, Instances testingInstances, ArrayList<Attribute> classificationAttributes, Instances classificationInstances, String revision) {
         Id3 id3 = new Id3(); // Id3 tree to be used in testing
         addInstance(revision, instanceK, attributes); // add revision to K
-        id3.buildClassifier(instanceK); // build our tree using K
-        System.out.println(instanceK + "\n"); // print K with revision
-        System.out.println(id3 + "\n"); // print the tree generated
+        try {
+            id3.buildClassifier(instanceK); // build our tree using K
 
-        Evaluation evaluation = new Evaluation(instanceK);
-        evaluation.evaluateModel(id3, testingInstances); // evaluate to see if K, after being revised, correctly predicts Phi
+            System.out.println(instanceK + "\n"); // print K with revision
+            System.out.println(id3 + "\n"); // print the tree generated
+            Evaluation evaluation = new Evaluation(instanceK);
+            evaluation.evaluateModel(id3, testingInstances); // evaluate to see if K, after being revised, correctly predicts Phi
 
-        if (evaluation.pctCorrect() == 100) {
-            revision = revision + " && True"; // if prediction was correct add the believes attribute as positive
-            System.out.println("This revision causes us to believe Phi\n");
-        } else {
-            revision = revision + " && False"; // if prediction was incorrect add the believes attribute as negative
-            System.out.println("This revision does not causes us to believe Phi\n");
+            if (evaluation.pctCorrect() == 100) {
+                revision = revision + " && True"; // if prediction was correct add the believes attribute as positive
+                System.out.println("This revision causes us to believe Phi\n");
+            } else {
+                revision = revision + " && False"; // if prediction was incorrect add the believes attribute as negative
+                System.out.println("This revision does not causes us to believe Phi\n");
+            }
+
+            addInstance(revision, classificationInstances, classificationAttributes);  // add this revision and its result, to our classification instances
+
+            instanceK.remove(instanceK.size() - 1); // remove the revision from K
+
+            return evaluation.pctCorrect();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
         }
-
-        addInstance(revision, classificationInstances, classificationAttributes);  // add this revision and its result, to our classification instances
-
-        instanceK.remove(instanceK.size() - 1); // remove the revision from K
-
-        return evaluation.pctCorrect();
     }
 
     /*
