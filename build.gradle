@@ -2,7 +2,10 @@ plugins {
     id 'groovy'
     id 'java'
     id 'org.jetbrains.intellij' version '0.4.9'
+    id 'application'
 }
+
+mainClassName = 'Main'
 
 group 'bcit'
 version '1.0'

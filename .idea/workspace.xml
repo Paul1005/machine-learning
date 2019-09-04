@@ -2,11 +2,85 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="15bb43a3-06eb-4bdb-a5f1-41952ab92d6e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TextFileDecrypter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TextFileDecrypter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Input.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main-instrumented/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main-instrumented/TextFileDecrypter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main-instrumented/revisionOperator/Belief.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main-instrumented/revisionOperator/RevisionOperator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/TextFileDecrypter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/revisionOperator/Belief.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/revisionOperator/RevisionOperator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distributions/machine-learning-1.0.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/config/options/updates.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/all-1.1.2.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/arpack_combined_all-0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/bounce-0.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/core-1.1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/groovy-all-2.3.11.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/java-cup-11b-2015.03.26.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/java-cup-11b-runtime-2015.03.26.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/jniloader-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/machine-learning-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/mtj-1.0.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/native_ref-java-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/native_system-java-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-java-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_ref-linux-armhf-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_ref-linux-i686-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_ref-linux-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_ref-osx-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_ref-win-i686-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_ref-win-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_system-linux-armhf-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_system-linux-i686-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_system-linux-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_system-osx-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_system-win-i686-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/netlib-native_system-win-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/simpleEducationalLearningSchemes-1.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/weka-dev-3.9.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins-test/machine-learning/lib/weka-stable-3.8.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/all-1.1.2.pom" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/arpack_combined_all-0.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/bounce-0.18.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/core-1.1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/groovy-all-2.3.11.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/java-cup-11b-2015.03.26.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/java-cup-11b-runtime-2015.03.26.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/jniloader-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/machine-learning-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/mtj-1.0.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/native_ref-java-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/native_system-java-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-java-1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_ref-linux-armhf-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_ref-linux-i686-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_ref-linux-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_ref-osx-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_ref-win-i686-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_ref-win-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_system-linux-armhf-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_system-linux-i686-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_system-linux-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_system-osx-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_system-win-i686-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/netlib-native_system-win-x86_64-1.1-natives.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/simpleEducationalLearningSchemes-1.0.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/weka-dev-3.9.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/idea-sandbox/plugins/machine-learning/lib/weka-stable-3.8.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/machine-learning-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/patchedPluginXmlFiles/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Input.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/InputOld.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/META-INF/plugin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -74,6 +148,7 @@
           <entry key="arff" value="75" />
           <entry key="csv" value="5" />
           <entry key="gradle" value="3" />
+          <entry key="gradlew" value="1" />
           <entry key="java" value="56" />
           <entry key="txt" value="2" />
           <entry key="xml" value="1" />
@@ -84,7 +159,7 @@
           <entry key="CSV" value="5" />
           <entry key="Groovy" value="3" />
           <entry key="JAVA" value="56" />
-          <entry key="PLAIN_TEXT" value="77" />
+          <entry key="PLAIN_TEXT" value="78" />
           <entry key="XML" value="1" />
         </counts>
       </usages-collector>
@@ -92,7 +167,7 @@
         <counts>
           <entry key="arff" value="202" />
           <entry key="csv" value="32" />
-          <entry key="gradle" value="2" />
+          <entry key="gradle" value="46" />
           <entry key="java" value="20260" />
           <entry key="txt" value="267" />
         </counts>
@@ -100,7 +175,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSV" value="32" />
-          <entry key="Groovy" value="2" />
+          <entry key="Groovy" value="46" />
           <entry key="JAVA" value="20260" />
           <entry key="PLAIN_TEXT" value="469" />
         </counts>
@@ -112,13 +187,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1632">
-              <caret line="103" column="71" selection-start-line="103" selection-start-column="71" selection-end-line="103" selection-end-column="71" />
+            <state relative-caret-position="697">
+              <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gradlew">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -131,33 +211,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/core/Attribute.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11815">
-              <caret line="731" selection-start-line="731" selection-end-line="731" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/settings.gradle">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
+            <state relative-caret-position="238">
+              <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+            <state relative-caret-position="289">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -169,7 +240,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/Input.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="227">
-              <caret line="36" column="4" lean-forward="true" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+              <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -186,8 +257,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/TextFileDecrypter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state relative-caret-position="119">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2717#2718#0" expanded="true" />
@@ -256,7 +327,7 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="C:\Users\Paul\.gradle\wrapper\dists\gradle-4.8-bin\divx0s2uj4thofgytb7gf9fsi\gradle-4.8" />
+        <entry key="$PROJECT_DIR$" value="C:\Users\Paul\.gradle\wrapper\dists\gradle-4.8-all\41c9mvq2w0645xx6nsenaerjl\gradle-4.8" />
       </map>
     </option>
     <option name="myGradleVersions">
@@ -305,6 +376,11 @@
                 <option name="name" value="buildPlugin" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Runs this project as a JVM application" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="run" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Generates Gradle wrapper files." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="wrapper" />
@@ -313,6 +389,11 @@
                 <option name="description" value="Verifies built plugin." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="verifyPlugin" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Creates OS specific scripts to run the project as a JVM application." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="startScripts" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Assembles a jar archive containing the main classes." />
@@ -338,6 +419,11 @@
                 <option name="description" value="Displays the tasks runnable from root project 'machine-learning'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles the main distributions" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="assembleDist" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Initializes a new Gradle build." />
@@ -399,6 +485,16 @@
                 <option name="name" value="buildNeeded" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
+                <option name="description" value="Bundles the project as a distribution." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="distTar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Bundles the project as a distribution." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="distZip" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
                 <option name="description" value="Displays the components produced by root project 'machine-learning'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="components" />
@@ -447,6 +543,11 @@
                 <option name="description" value="Publish plugin distribution on plugins.jetbrains.com." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="publishPlugin" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Installs the project as a distribution as-is." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
+                <option name="name" value="installDist" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Displays the insight into a specific dependency in root project 'machine-learning'." />
@@ -507,9 +608,9 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="6260913274641" />
+        <entry key="$PROJECT_DIR$" value="6263244837345" />
         <entry key="$PROJECT_DIR$/.gradle" value="0" />
-        <entry key="$PROJECT_DIR$/build.gradle" value="2685315621" />
+        <entry key="$PROJECT_DIR$/build.gradle" value="3613058864" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="2585518924" />
         <entry key="$PROJECT_DIR$/settings.gradle" value="337762180" />
       </map>
@@ -787,7 +888,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/KNNDemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/LogisticRegressionDemo.java" />
         <option value="$PROJECT_DIR$/src/main/java/SMODemo.java" />
@@ -830,6 +930,7 @@
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java" />
         <option value="$PROJECT_DIR$/src/main/java/TextFileDecrypter.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
       </list>
     </option>
   </component>
@@ -895,11 +996,11 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567558112827" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1567561073728" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -918,7 +1019,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Gradle.machine-learning [build]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="machine-learning_main" />
@@ -1031,12 +1132,12 @@
       <workItem from="1567187786782" duration="13328000" />
       <workItem from="1567305853511" duration="5823000" />
       <workItem from="1567452453181" duration="16141000" />
-      <workItem from="1567551874857" duration="4588000" />
+      <workItem from="1567551874857" duration="6726000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="311723000" />
+    <option name="totallyTimeSpent" value="313861000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1090,7 +1191,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/linear-train.arff" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/linear-test.arff" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nz.ac.waikato.cms.weka/weka-stable/3.8.0/fa6ebf413ea3241f6f684df3f18576e568db5555/weka-stable-3.8.0-sources.jar!/weka/core/converters/ArffSaver.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1180,16 +1280,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/InputOld.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -1200,7 +1290,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/Input.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
-          <caret line="36" column="4" lean-forward="true" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1218,20 +1308,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1632">
-          <caret line="103" column="71" selection-start-line="103" selection-start-column="71" selection-end-line="103" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/TextFileDecrypter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="21" column="13" lean-forward="true" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2717#2718#0" expanded="true" />
@@ -1250,11 +1330,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="42" selection-start-line="5" selection-start-column="42" selection-end-line="5" selection-end-column="42" />
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/revisionOperator/RevisionOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradlew">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
         </state>
       </provider>
     </entry>
