@@ -1,0 +1,12 @@
+
+@relation decision.symbolic
+
+@attribute country {USA, Europe, Australia,Brazil}
+@attribute bigstar {yes,no}
+@attribute genre {scifi, comedy ,romance}
+@attribute result {Success, Failure}
+
+@data
+Brazil,	no	,scifi	,Failure
+Europe,	yes	,comedy,	Success
+USA,	yes	,comedy,	Success

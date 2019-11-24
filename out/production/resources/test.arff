@@ -1,0 +1,12 @@
+@relation test
+
+@attribute Sunny {Overcast,Rain}
+@attribute Hot {Hot,Cool}
+@attribute High {High,Normal}
+@attribute Weak {Weak,Strong}
+@attribute No {Yes,No}
+
+@data
+Overcast,Hot,High,Weak,Yes
+Rain,Cool,Normal,Strong,No
+Overcast,Cool,Normal,Strong,Yes

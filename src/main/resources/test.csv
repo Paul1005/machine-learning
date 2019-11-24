@@ -1,0 +1,5 @@
+Outlook,Temp,Humidity,Wind,Decision
+Sunny,Hot,High,Weak,No
+Overcast,Hot,High,Weak,Yes
+Rain,Cool,Normal,Strong,No
+Overcast,Cool,Normal,Strong,Yes
